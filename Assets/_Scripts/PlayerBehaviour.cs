@@ -10,7 +10,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int fireRate;
 
 
-    public BulletManager bulletManager;
+    // public BulletManager bulletManager;
 
     [Header("Movement")]
     public float speed;
@@ -83,9 +83,11 @@ public class PlayerBehaviour : MonoBehaviour
             // delays firing
             if (Time.frameCount % fireRate == 0)
             {
+                // var tempBullet = bulletManager.GetBullet(bulletSpawn.position, bulletSpawn.forward);
+                // tempBullet.transform.SetParent(bulletManager.gameObject.transform);
 
-                var tempBullet = bulletManager.GetBullet(bulletSpawn.position, bulletSpawn.forward);
-                tempBullet.transform.SetParent(bulletManager.gameObject.transform);
+                var tempBullet = BulletManager.GetInstance().GetBullet(bulletSpawn.position, bulletSpawn.forward);
+                tempBullet.transform.SetParent(BulletManager.GetInstance().parentObject.transform);
             }
         }
     }

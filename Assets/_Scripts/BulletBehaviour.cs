@@ -14,14 +14,14 @@ public class BulletBehaviour : MonoBehaviour
     public Vector3 collisionNormal;
     public float penetration;
 
-    public BulletManager bulletManager;
+    // public BulletManager bulletManager;
 
     // Start is called before the first frame update
     void Start()
     {
         isColliding = false;
         radius = Mathf.Max(transform.localScale.x, transform.localScale.y, transform.localScale.z) * 0.5f;
-        bulletManager = FindObjectOfType<BulletManager>();
+        // bulletManager = FindObjectOfType<BulletManager>();
     }
 
     // Update is called once per frame
@@ -40,7 +40,8 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, Vector3.zero) > range)
         {
-            bulletManager.ReturnBullet(this.gameObject);
+            // bulletManager.ReturnBullet(this.gameObject);
+            BulletManager.GetInstance().ReturnBullet(this.gameObject);
         }
     }
 
