@@ -33,6 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
         _Move();
     }
 
+    // moves character
     private void _Move()
     {
         if (isGrounded)
@@ -74,7 +75,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-
+    // fires bullet
     private void _Fire()
     {
         if (Input.GetAxisRaw("Fire1") > 0.0f)
