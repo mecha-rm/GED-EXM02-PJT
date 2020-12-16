@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -29,8 +30,8 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _Fire();
-        _Move();
+        // _Fire();
+        // _Move();
     }
 
     // moves character
@@ -73,6 +74,57 @@ public class PlayerBehaviour : MonoBehaviour
 
             transform.position += body.velocity;
         }
+    }
+
+    // on movement
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        switch(context.control.name)
+        {
+            case "w":
+            case "upArrow":
+                // move forward
+                body.velocity = playerCam.transform.forward * speed * Time.deltaTime;
+                break;
+
+            case "s":
+            case "downArrow":
+                // move Back
+                body.velocity = -playerCam.transform.forward * speed * Time.deltaTime;
+                break;
+
+            case "a":
+            case "leftArrow":
+                // move left
+                body.velocity = -playerCam.transform.right * speed * Time.deltaTime;
+                break;
+
+            case "d":
+            case "rightArrow":
+                // move right
+                body.velocity = playerCam.transform.right * speed * Time.deltaTime;
+                break;
+
+            case "spaceBar":
+                body.velocity = transform.up * speed * 0.1f * Time.deltaTime;
+                break;
+
+            default:
+                break;
+        }
+
+        body.velocity = Vector3.Lerp(body.velocity, Vector3.zero, 0.9f);
+        body.velocity = new Vector3(body.velocity.x, 0.0f, body.velocity.z); // remove y
+
+
+        if(context.control.name == "spaceBar") // jump
+        {
+            body.velocity = transform.up * speed * 0.1f * Time.deltaTime;
+        }
+
+        // velocity
+        transform.position += body.velocity;
+
     }
 
     // fires bullet

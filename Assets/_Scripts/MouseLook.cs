@@ -28,6 +28,12 @@ public class MouseLook : MonoBehaviour
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
     }
 
+    // mouse
+    private void OnMouse()
+    {
+       
+    }
+
     void Update()
     {
         // Ensure the cursor is always locked when set
@@ -41,7 +47,9 @@ public class MouseLook : MonoBehaviour
         var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
 
         // Get raw mouse input for a cleaner reading on more sensitive mice.
-        var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        // var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")); // original
+        var mouseDelta = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // new
+
 
         // Scale input against the sensitivity setting and multiply that against the smoothing value.
         mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
