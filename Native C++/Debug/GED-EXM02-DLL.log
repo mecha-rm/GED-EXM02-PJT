@@ -1,0 +1,15 @@
+﻿  DataManager.cpp
+C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\DataManager.h(97,19): warning C4251: 'DataManager::file': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'DataManager'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xstring(4648): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\DataManager.h(100,37): warning C4251: 'DataManager::dataRecords': class 'std::vector<DataRecord,std::allocator<DataRecord>>' needs to have dll-interface to be used by clients of class 'DataManager'
+C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\DataManager.h(100): message : see declaration of 'std::vector<DataRecord,std::allocator<DataRecord>>'
+C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\DataManager.cpp(41,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\DataManager.cpp(69,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\DataManager.cpp(153,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\DataManager.cpp(163,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\DataManager.cpp(173,26): warning C4018: '<': signed/unsigned mismatch
+  Main.cpp
+  Wrapper.cpp
+  Generating Code...
+     Creating library C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\Debug\GED-EXM02-DLL.lib and object C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\Debug\GED-EXM02-DLL.exp
+  GED-EXM02-DLL.vcxproj -> C:\Users\roder\source\year 3 repos\GED-EXM02-PJT\Native C++\Debug\GED-EXM02-DLL.dll

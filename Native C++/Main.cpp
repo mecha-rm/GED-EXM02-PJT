@@ -1,3 +1,9 @@
+/*
+* Name: Roderick "R.J." Montague
+* Student Number: 100701758
+* Date: 12/15/2020
+* Description: DLL for storing data.
+*/
 // Main.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
