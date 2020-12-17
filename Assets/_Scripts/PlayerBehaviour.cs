@@ -191,7 +191,7 @@ public class PlayerBehaviour : MonoBehaviour
     // called when firing
     public void OnFire(InputAction.CallbackContext context)
     {
-        Debug.Log(context.control.name);
+        // Debug.Log(context.control.name);
 
         if (context.control.name == "leftButton")
             fireBullet = !fireBullet;
