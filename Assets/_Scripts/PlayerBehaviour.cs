@@ -22,10 +22,15 @@ public class PlayerBehaviour : MonoBehaviour
     public CubeBehaviour cube;
     public Camera playerCam;
 
-    // movement
+    // movement keys
     private bool wKey, aKey, sKey, dKey;
     private bool upArrow, downArrow, leftArrow, rightArrow;
+
+    // jump key
     private bool spaceBar;
+
+    // fire key
+    private bool fireBullet;
 
     void start()
     {
@@ -38,9 +43,10 @@ public class PlayerBehaviour : MonoBehaviour
         // _Fire();
         // _Move();
         Movement();
+        FireBullet();
     }
 
-    // moves character
+    // moves character (original function)
     private void _Move()
     {
         if (isGrounded)
@@ -88,7 +94,7 @@ public class PlayerBehaviour : MonoBehaviour
         // Value - triggers three times (start of press, full push, release)
         // Button - triggers three times (start of press, full push, release)
         // Pass Through - triggers twice (down and up)
-        Debug.Log(context.control.name);
+        // Debug.Log(context.control.name);
 
         switch (context.control.name)
         {
@@ -167,10 +173,34 @@ public class PlayerBehaviour : MonoBehaviour
         transform.position += body.velocity;
     }
 
-    // fires bullet
+    // fires bullet (original function)
     private void _Fire()
     {
         if (Input.GetAxisRaw("Fire1") > 0.0f)
+        {
+            // delays firing
+            if (Time.frameCount % fireRate == 0)
+            {
+
+                var tempBullet = bulletManager.GetBullet(bulletSpawn.position, bulletSpawn.forward);
+                tempBullet.transform.SetParent(bulletManager.gameObject.transform);
+            }
+        }
+    }
+
+    // called when firing
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        Debug.Log(context.control.name);
+
+        if (context.control.name == "leftButton")
+            fireBullet = !fireBullet;
+    }
+
+    // fires the bullet
+    private void FireBullet()
+    {
+        if (fireBullet)
         {
             // delays firing
             if (Time.frameCount % fireRate == 0)

@@ -544,6 +544,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ec550740-dccc-4b72-ba38-cefb9c969d59
     m_ActionName: Mouse/Mouse[/Mouse/forwardButton,/Mouse/backButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 579578806}
+        m_TargetAssemblyTypeName: PlayerBehaviour, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5d9cc381-d6ff-40f3-a99b-fd8bf0726295
+    m_ActionName: Mouse/Mouse Click[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -723,6 +739,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ec550740-dccc-4b72-ba38-cefb9c969d59
     m_ActionName: Mouse/Mouse[/Mouse/forwardButton,/Mouse/backButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d9cc381-d6ff-40f3-a99b-fd8bf0726295
+    m_ActionName: Mouse/Mouse Click[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Mouse

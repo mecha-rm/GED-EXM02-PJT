@@ -12,6 +12,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Mouse Click",
+                    "type": "Button",
+                    "id": "64794121-afb5-48fc-bd7e-bbb06f6f2729",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -113,15 +121,26 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63a7739c-b211-45d0-a6da-b4a8d6d0eeba",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "Mouse",
+            "name": "Camera",
             "id": "781e6607-e853-4522-abab-bbc2ca91b023",
             "actions": [
                 {
-                    "name": "Mouse",
+                    "name": "Mouse Position",
                     "type": "Value",
                     "id": "ec550740-dccc-4b72-ba38-cefb9c969d59",
                     "expectedControlType": "Vector2",
@@ -132,23 +151,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "8d377c54-a3ca-4a89-9672-de71feed306a",
-                    "path": "<Mouse>/forwardButton",
+                    "id": "af83c375-8a76-412b-a9e2-6fd98f7a8960",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Mouse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2b31704e-0bfc-48ca-9609-6ae6880631c5",
-                    "path": "<Mouse>/backButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Mouse",
+                    "action": "Mouse Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
