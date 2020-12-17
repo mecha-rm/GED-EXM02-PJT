@@ -71,17 +71,18 @@ public class BulletManager
     public bulletType currBulletType;
 
     // TODO: change these to lists so that they're easier to update
-    // private List<GameObject> bullets;
-    private GameObject bullet0; // bullet type 0
-    private GameObject bullet1; // bullet type 1
+    private List<GameObject> bulletBases;
+    // private GameObject bullet0; // bullet type 0
+    // private GameObject bullet1; // bullet type 1
 
     public GameObject parentObject;
 
     // public Queue<GameObject> m_playerBulletPool;
 
     // bullet pools
-    public Queue<GameObject> bulletPool0;
-    public Queue<GameObject> bulletPool1;
+    public List<Queue<GameObject>> bulletPools;
+    // public Queue<GameObject> bulletPool0;
+    // public Queue<GameObject> bulletPool1;
 
     // constructor
     private BulletManager()
@@ -121,19 +122,42 @@ public class BulletManager
 
         // create empty Queue structures
         // m_playerBulletPool = new Queue<GameObject>();
-        bulletPool0 = new Queue<GameObject>();
-        bulletPool1 = new Queue<GameObject>();
+        
+        // bulletPool0 = new Queue<GameObject>();
+        // bulletPool1 = new Queue<GameObject>();
 
         {
             // loading bullet types
-            bullet0 = (GameObject)Resources.Load("Prefabs/Bullet");
-            bullet1 = (GameObject)Resources.Load("Prefabs/Bullet1");
+            // bullet0 = (GameObject)Resources.Load("Prefabs/Bullet");
+            // bullet1 = (GameObject)Resources.Load("Prefabs/Bullet1");
 
             // loads a prefab
             // if (bullet == null)
             //     bullet = (GameObject)Resources.Load("Prefabs/Bullet");
 
         }
+
+        bulletBases = new List<GameObject>();
+        bulletPools = new List<Queue<GameObject>>(); 
+
+        // adding bullet pools and bullets
+        for (int i = 0; i < BULLET_TYPE_COUNT; i++)
+        {
+            bulletPools.Add(new Queue<GameObject>());
+
+            // adds bullet types as bases
+            switch (i)
+            {
+                case ((int)bulletType.sphere): // sphere copy
+                    bulletBases.Add((GameObject)Resources.Load("Prefabs/Bullet"));
+                    break;
+
+                case ((int)bulletType.cube): // cube copy
+                    bulletBases.Add((GameObject)Resources.Load("Prefabs/Bullet1"));
+                    break;
+            }
+        }
+
 
         // bullet count
         // for (int count = 0; count < MaxBullets; count++)
@@ -146,22 +170,51 @@ public class BulletManager
         // }
 
         // creates each bullet
-        for(int b = 0; b < BULLET_TYPE_COUNT; b++)
+        // for (int b = 0; b < BULLET_TYPE_COUNT; b++)
+        for (int b = 0; b < bulletBases.Count; b++)
         {
             // bullet type being generated
             GameObject bullet = null;
 
-            switch(b) // gets the bullet type
-            {
-                case ((int)bulletType.sphere): // sphere copy
-                    bullet = bullet0;
-                    break;
+            // switch(b) // gets the bullet type
+            // {
+            //     case ((int)bulletType.sphere): // sphere copy
+            //         bullet = bullet0;
+            //         break;
+            // 
+            //     case ((int)bulletType.cube): // cube copy
+            //         bullet = bullet1;
+            //         break;
+            // }
+            // 
+            // // if a bullt has been set
+            // if(bullet != null)
+            // {
+            //     // makes all bullets for the given queue
+            //     for (int count = 0; count < MaxBullets; count++)
+            //     {
+            //         GameObject tempPlayerBullet = MonoBehaviour.Instantiate(bullet);
+            // 
+            //         tempPlayerBullet.transform.SetParent(parentObject.transform);
+            //         tempPlayerBullet.SetActive(false);
+            // 
+            //         // adds the instantiated bullet to the proper queue
+            //         switch (b)
+            //         {
+            //             case ((int)bulletType.sphere): // sphere copy
+            //                 bulletPool0.Enqueue(tempPlayerBullet);
+            //                 break;
+            // 
+            //             case ((int)bulletType.cube): // cube copy
+            //                 bulletPool1.Enqueue(tempPlayerBullet);
+            //                 break;
+            //         }
+            //     }
+            // }
 
-                case ((int)bulletType.cube): // cube copy
-                    bullet = bullet1;
-                    break;
-            }
-
+            // gets the current bullet base.
+            bullet = bulletBases[b];
+            
             // if a bullt has been set
             if(bullet != null)
             {
@@ -169,71 +222,74 @@ public class BulletManager
                 for (int count = 0; count < MaxBullets; count++)
                 {
                     GameObject tempPlayerBullet = MonoBehaviour.Instantiate(bullet);
-
+            
                     tempPlayerBullet.transform.SetParent(parentObject.transform);
                     tempPlayerBullet.SetActive(false);
 
-                    // adds the instantiated bullet to the proper queue
-                    switch (b)
-                    {
-                        case ((int)bulletType.sphere): // sphere copy
-                            bulletPool0.Enqueue(tempPlayerBullet);
-                            break;
-
-                        case ((int)bulletType.cube): // cube copy
-                            bulletPool1.Enqueue(tempPlayerBullet);
-                            break;
-                    }
+                    bulletPools[(int)b].Enqueue(tempPlayerBullet);
+            
+                    // // adds the instantiated bullet to the proper queue
+                    // switch (b)
+                    // {
+                    //     case ((int)bulletType.sphere): // sphere copy
+                    //         bulletPool0.Enqueue(tempPlayerBullet);
+                    //         break;
+                    // 
+                    //     case ((int)bulletType.cube): // cube copy
+                    //         bulletPool1.Enqueue(tempPlayerBullet);
+                    //         break;
+                    // }
                 }
             }
-
-            
         }
 
-        
+
 
     }
 
     // gets the current bullet type
     private GameObject GetCurrentBulletBase()
     {
-        GameObject currBullet = null;
+        // GameObject currBullet = null;
+        // 
+        // // gets the current bullet base
+        // switch (currBulletType)
+        // {
+        //     case bulletType.sphere:
+        //         currBullet = bullet0;
+        //         break;
+        // 
+        //     case bulletType.cube:
+        //         currBullet = bullet1;
+        //         break;
+        // }
+        // 
+        // return currBullet;
 
-        // gets the current bullet base
-        switch (currBulletType)
-        {
-            case bulletType.sphere:
-                currBullet = bullet0;
-                break;
-
-            case bulletType.cube:
-                currBullet = bullet1;
-                break;
-        }
-
-        return currBullet;
+        return bulletBases[(int)currBulletType];
     }
 
     // gets the current queue
     private Queue<GameObject> GetCurrentBulletQueue()
     {
-        Queue<GameObject> currBulletPool = null;
+        // Queue<GameObject> currBulletPool = null;
+        // 
+        // // gets the current bullet queue
+        // switch (currBulletType)
+        // {
+        //     case bulletType.sphere:
+        //         currBulletPool = bulletPool0;
+        //         break;
+        // 
+        //     case bulletType.cube:
+        //         currBulletPool = bulletPool1;
+        //         break;
+        // }
+        // 
+        // // returns the current bullet pool.
+        // return currBulletPool;
 
-        // gets the current bullet queue
-        switch (currBulletType)
-        {
-            case bulletType.sphere:
-                currBulletPool = bulletPool0;
-                break;
-
-            case bulletType.cube:
-                currBulletPool = bulletPool1;
-                break;
-        }
-
-        // returns the current bullet pool.
-        return currBulletPool;
-
+        return bulletPools[(int)currBulletType];
     }
 
     // gets a bullet
@@ -277,21 +333,23 @@ public class BulletManager
     {
         // return m_playerBulletPool.Count > 0;
 
-        bool check = false;
+        // bool check = false;
+        // 
+        // // checks if there are bullets available in the current queue.
+        // switch (currBulletType)
+        // {
+        //     case bulletType.sphere:
+        //         check = bulletPool0.Count > 0;
+        //         break;
+        // 
+        //     case bulletType.cube:
+        //         check = bulletPool1.Count > 0;
+        //         break;
+        // }
+        // 
+        // return check;
 
-        // checks if there are bullets available in the current queue.
-        switch (currBulletType)
-        {
-            case bulletType.sphere:
-                check = bulletPool0.Count > 0;
-                break;
-
-            case bulletType.cube:
-                check = bulletPool1.Count > 0;
-                break;
-        }
-
-        return check;
+        return bulletPools[(int)currBulletType].Count > 0;
     }
 
     // returns the bullets
@@ -302,15 +360,18 @@ public class BulletManager
 
         BulletManager.bulletType returnedType = returnedBullet.GetComponent<BulletBehaviour>().bulletType;
 
-        switch(returnedType)
-        {
-            case BulletManager.bulletType.sphere: // sphere
-                bulletPool0.Enqueue(returnedBullet);
-                break;
+        // returns the bullet to its queue
+        bulletPools[(int)returnedType].Enqueue(returnedBullet);
 
-            case BulletManager.bulletType.cube: // cube
-                bulletPool1.Enqueue(returnedBullet);
-                break;
-        }
+        // switch(returnedType)
+        // {
+        //     case BulletManager.bulletType.sphere: // sphere
+        //         bulletPool0.Enqueue(returnedBullet);
+        //         break;
+        // 
+        //     case BulletManager.bulletType.cube: // cube
+        //         bulletPool1.Enqueue(returnedBullet);
+        //         break;
+        // }
     }
 }
