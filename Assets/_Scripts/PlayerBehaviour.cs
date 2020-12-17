@@ -79,6 +79,11 @@ public class PlayerBehaviour : MonoBehaviour
     // on movement
     public void OnMove(InputAction.CallbackContext context)
     {
+        // Value - triggers three times (start of press, full push, release)
+        // Button - triggers three times (start of press, full push, release)
+        // Pass Through - triggers twice (down and up)
+        Debug.Log(context.control.name);
+
         switch(context.control.name)
         {
             case "w":

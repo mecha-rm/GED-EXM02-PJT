@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MouseLook : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class MouseLook : MonoBehaviour
     // Yaw rotation will affect this object instead of the camera if set.
     public GameObject characterBody;
 
+    // gets the mouse position
+    private Vector2 mousePosition = new Vector2();
+
     void Start()
     {
         // Set target direction to the camera's initial orientation.
@@ -28,10 +32,11 @@ public class MouseLook : MonoBehaviour
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
     }
 
-    // mouse
-    private void OnMouse()
+    // mouse position
+    public void OnMouse(InputAction.CallbackContext context)
     {
-       
+        mousePosition = context.ReadValue<Vector2>();
+        Debug.Log("Mouse Position: " + mousePosition);
     }
 
     void Update()
@@ -48,8 +53,8 @@ public class MouseLook : MonoBehaviour
 
         // Get raw mouse input for a cleaner reading on more sensitive mice.
         // var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")); // original
-        var mouseDelta = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // new
-
+        // var mouseDelta = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // new
+        var mouseDelta = mousePosition;
 
         // Scale input against the sensitivity setting and multiply that against the smoothing value.
         mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));

@@ -9,7 +9,7 @@
                     "name": "Movement",
                     "type": "PassThrough",
                     "id": "a58276b9-b407-429e-a5e8-8426a36b1a95",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": ""
                 }
@@ -122,7 +122,7 @@
             "actions": [
                 {
                     "name": "Mouse",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "ec550740-dccc-4b72-ba38-cefb9c969d59",
                     "expectedControlType": "Vector2",
                     "processors": "",
