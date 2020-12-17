@@ -22,6 +22,11 @@ public class PlayerBehaviour : MonoBehaviour
     public CubeBehaviour cube;
     public Camera playerCam;
 
+    // movement
+    private bool wKey, aKey, sKey, dKey;
+    private bool upArrow, downArrow, leftArrow, rightArrow;
+    private bool spaceBar;
+
     void start()
     {
 
@@ -32,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         // _Fire();
         // _Move();
+        Movement();
     }
 
     // moves character
@@ -84,52 +90,81 @@ public class PlayerBehaviour : MonoBehaviour
         // Pass Through - triggers twice (down and up)
         Debug.Log(context.control.name);
 
-        switch(context.control.name)
+        switch (context.control.name)
         {
-            case "w":
-            case "upArrow":
                 // move forward
-                body.velocity = playerCam.transform.forward * speed * Time.deltaTime;
+            case "w":
+                wKey = !wKey;
                 break;
-
+            case "upArrow":
+                upArrow = !upArrow;
+                break;
+                
+                // move back
             case "s":
+                sKey = !sKey;
+                break;
             case "downArrow":
-                // move Back
-                body.velocity = -playerCam.transform.forward * speed * Time.deltaTime;
+                downArrow = !downArrow;
                 break;
 
-            case "a":
-            case "leftArrow":
                 // move left
-                body.velocity = -playerCam.transform.right * speed * Time.deltaTime;
+            case "a":
+                aKey = !aKey;
+                break;
+            case "leftArrow":
+                leftArrow = !leftArrow;
                 break;
 
-            case "d":
-            case "rightArrow":
                 // move right
-                body.velocity = playerCam.transform.right * speed * Time.deltaTime;
+            case "d":
+                dKey = !dKey;
+                break;
+            case "rightArrow":
+                rightArrow = !rightArrow;
                 break;
 
+                // jump
             case "spaceBar":
-                body.velocity = transform.up * speed * 0.1f * Time.deltaTime;
+                spaceBar = !spaceBar;
                 break;
 
             default:
                 break;
         }
 
+    }
+
+    // movement calculation
+    private void Movement()
+    {
+        // move forward
+        if (wKey || upArrow)
+            body.velocity = playerCam.transform.forward * speed * Time.deltaTime;
+
+        // move back
+        if (sKey || downArrow)
+            body.velocity = -playerCam.transform.forward * speed * Time.deltaTime;
+
+        // move left
+        if (aKey || leftArrow)
+            body.velocity = -playerCam.transform.right * speed * Time.deltaTime;
+
+        // move right
+        if (dKey || rightArrow)
+            body.velocity = playerCam.transform.right * speed * Time.deltaTime;
+
+        // lerp function
+        // body.velocity = Vector3.Lerp(body.velocity, Vector3.zero, 0.9f); // original
         body.velocity = Vector3.Lerp(body.velocity, Vector3.zero, 0.9f);
         body.velocity = new Vector3(body.velocity.x, 0.0f, body.velocity.z); // remove y
 
-
-        if(context.control.name == "spaceBar") // jump
-        {
+        // jump
+        if (spaceBar)
             body.velocity = transform.up * speed * 0.1f * Time.deltaTime;
-        }
 
         // velocity
         transform.position += body.velocity;
-
     }
 
     // fires bullet
