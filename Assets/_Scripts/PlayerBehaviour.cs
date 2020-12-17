@@ -44,6 +44,7 @@ public class PlayerBehaviour : MonoBehaviour
         // _Move();
         Movement();
         FireBullet();
+        // ChangeBullet();
     }
 
     // moves character (original function)
@@ -208,18 +209,17 @@ public class PlayerBehaviour : MonoBehaviour
             if (Time.frameCount % fireRate == 0)
             {
 
-                var tempBullet = bulletManager.GetBullet(bulletSpawn.position, bulletSpawn.forward);
-                tempBullet.transform.SetParent(bulletManager.gameObject.transform);
+                var tempBullet = BulletManager.GetInstance().GetBullet(bulletSpawn.position, bulletSpawn.forward);
+                tempBullet.transform.SetParent(BulletManager.GetInstance().parentObject.transform);
             }
         }
     }
 
-    void FixedUpdate()
+    // original function for changing the bullet
+    private void ChangeBullet()
     {
-        GroundCheck();
-
         // this will need to be changed to updated input system
-        if(Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
         {
             BulletManager.GetInstance().SetCurrentBulletType(0);
         }
@@ -229,9 +229,43 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    // changes the bullet
+    public void OnBulletTypeChange(InputAction.CallbackContext context)
+    {
+        // Debug.Log("Control Name: " + context.control.name);
+
+        // int bulletInt = context.ReadValue<int>();
+        int bulletInt = 0;
+
+        // due to the way this works, it provides a number 1 less than the number selected.
+        switch(context.control.name)
+        {
+            case "1":
+            case "numpad1":
+                bulletInt = 0;
+                break;
+
+            case "2":
+            case "numpad2":
+                bulletInt = 1;
+                break;
+
+            default:
+                break;
+        }
+
+        // changes type
+        BulletManager.GetInstance().SetCurrentBulletType(bulletInt);
+    }
+
+    // fixed update
+    void FixedUpdate()
+    {
+        GroundCheck();
+    }
+
     private void GroundCheck()
     {
         isGrounded = cube.isGrounded;
     }
-
 }

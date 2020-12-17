@@ -55,13 +55,6 @@ public class CollisionManager : MonoBehaviour
                 
             }
         }
-
-        // will need ot be changed for new input system
-        if(Input.GetKeyDown(KeyCode.R)) // re-enables all cubes
-        {
-            for (int i = 0; i < cubes.Length; i++)
-                cubes[i].gameObject.SetActive(true);
-        }
     }
 
     public static void CheckSphereAABB(BulletBehaviour s, CubeBehaviour b)
@@ -211,4 +204,21 @@ public class CollisionManager : MonoBehaviour
             }
         }
     }
+
+
+    // resets the whole round
+    // public void ResetScene()
+    // {
+    //     // will need ot be changed for new input system
+    //     if(Input.GetKeyDown(KeyCode.R)) // re-enables all cubes
+    //     {
+    //         for (int i = 0; i < cubes.Length; i++)
+    //             cubes[i].gameObject.SetActive(true);
+    //     }
+    // }
+    // 
+    // public void OnResetScene()
+    // {
+    // 
+    // }
 }
