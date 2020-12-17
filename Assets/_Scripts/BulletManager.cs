@@ -65,12 +65,13 @@ public class BulletManager
     // instance of bullet pool manager.
     private static BulletManager instance = null;
 
-    public int MaxBullets = 0; // originally 50
+    public int MaxBullets = 3; // originally 50
     // public GameObject bullet; // current bullet
 
     public bulletType currBulletType;
 
     // TODO: change these to lists so that they're easier to update
+    // private List<GameObject> bullets;
     private GameObject bullet0; // bullet type 0
     private GameObject bullet1; // bullet type 1
 
@@ -153,11 +154,11 @@ public class BulletManager
             switch(b) // gets the bullet type
             {
                 case ((int)bulletType.sphere): // sphere copy
-                    bullet = MonoBehaviour.Instantiate(bullet0);
+                    bullet = bullet0;
                     break;
 
                 case ((int)bulletType.cube): // cube copy
-                    bullet = MonoBehaviour.Instantiate(bullet1);
+                    bullet = bullet1;
                     break;
             }
 
