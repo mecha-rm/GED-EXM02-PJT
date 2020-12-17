@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MouseLook : MonoBehaviour
 {
@@ -9,14 +10,17 @@ public class MouseLook : MonoBehaviour
 
     public Vector2 clampInDegrees = new Vector2(360, 180);
     public bool lockCursor;
-    public Vector2 sensitivity = new Vector2(2, 2);
-    public Vector2 smoothing = new Vector2(3, 3);
+    public Vector2 sensitivity = new Vector2(2, 2); // the lower the value, the lower the sensitivity. Adjust in inspector.
+    public Vector2 smoothing = new Vector2(3, 3); // the lower the value, the slower the smoothing. Adjust in inspector.
     public Vector2 targetDirection;
     public Vector2 targetCharacterDirection;
 
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
     // Yaw rotation will affect this object instead of the camera if set.
     public GameObject characterBody;
+
+    // gets the mouse position
+    private Vector2 mousePosition = new Vector2();
 
     void Start()
     {
@@ -26,6 +30,14 @@ public class MouseLook : MonoBehaviour
         // Set target direction for the character body to its inital state.
         if (characterBody)
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
+    }
+
+    // mouse position
+    public void OnMouse(InputAction.CallbackContext context)
+    {
+        // Debug.Log("Entered");
+        mousePosition = context.ReadValue<Vector2>(); // gets orientation of mouse.
+        // Debug.Log("Mouse Position: " + mousePosition);
     }
 
     void Update()
@@ -41,7 +53,9 @@ public class MouseLook : MonoBehaviour
         var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
 
         // Get raw mouse input for a cleaner reading on more sensitive mice.
-        var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        // var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")); // original
+        // var mouseDelta = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // new
+        var mouseDelta = mousePosition;
 
         // Scale input against the sensitivity setting and multiply that against the smoothing value.
         mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
