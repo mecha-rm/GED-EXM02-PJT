@@ -95,6 +95,16 @@ public class PlayerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         GroundCheck();
+
+        // this will need to be changed to updated input system
+        if(Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            BulletManager.GetInstance().SetCurrentBulletType(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            BulletManager.GetInstance().SetCurrentBulletType(1);
+        }
     }
 
     private void GroundCheck()
