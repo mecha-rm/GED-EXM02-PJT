@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2352156713619636600}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,3 +99,7 @@ MonoBehaviour:
   range: 20
   radius: 0.05
   debug: 0
+  isColliding: 0
+  collisionNormal: {x: 0, y: 0, z: 0}
+  penetration: 0
+  bulletType: 0

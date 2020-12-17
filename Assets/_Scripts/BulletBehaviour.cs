@@ -56,6 +56,16 @@ public class BulletBehaviour : MonoBehaviour
         }
     }
 
+    // called on collision
+    // private void OnCollisionEnter(Collision collision)
+    // {
+    //     // bullet collided with block
+    //     if (collision.gameObject.tag == "Block")
+    //     {
+    //         collision.gameObject.SetActive(false);
+    //     }
+    // }
+
     // gets the type of the bullet
     public BulletManager.bulletType GetBulletType()
     {

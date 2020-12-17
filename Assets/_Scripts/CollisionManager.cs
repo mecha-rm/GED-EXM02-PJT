@@ -42,11 +42,13 @@ public class CollisionManager : MonoBehaviour
         }
 
         // Check each sphere against each AABB in the scene
-        foreach (var sphere in spheres)
+        foreach (var sphere in spheres) // bullet collision with cubes
         {
             foreach (var cube in cubes)
             {
-                if (cube.name != "Player")
+                // if the object has been deactivated, it shouldn't trigger collisions.
+                // if (cube.name != "Player")
+                if (cube.name != "Player" && cube.gameObject.activeInHierarchy == true)
                 {
                     CheckSphereAABB(sphere, cube);
                 }
@@ -54,11 +56,17 @@ public class CollisionManager : MonoBehaviour
             }
         }
 
-
+        // will need ot be changed for new input system
+        if(Input.GetKeyDown(KeyCode.R)) // re-enables all cubes
+        {
+            for (int i = 0; i < cubes.Length; i++)
+                cubes[i].gameObject.SetActive(true);
+        }
     }
 
     public static void CheckSphereAABB(BulletBehaviour s, CubeBehaviour b)
     {
+
         // get box closest point to sphere center by clamping
         var x = Mathf.Max(b.min.x, Mathf.Min(s.transform.position.x, b.max.x));
         var y = Mathf.Max(b.min.y, Mathf.Min(s.transform.position.y, b.max.y));
@@ -100,6 +108,9 @@ public class CollisionManager : MonoBehaviour
 
             
             Reflect(s);
+
+            // collision has happened. Uncomment to keep cubes.
+            b.gameObject.SetActive(false);
         }
 
     }
