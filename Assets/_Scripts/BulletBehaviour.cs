@@ -15,6 +15,7 @@ public class BulletBehaviour : MonoBehaviour
     public float penetration;
 
     // public BulletManager bulletManager;
+    public BulletManager.bulletType bulletType;
 
     // Start is called before the first frame update
     void Start()
@@ -53,5 +54,17 @@ public class BulletBehaviour : MonoBehaviour
 
             Gizmos.DrawWireSphere(transform.position, radius);
         }
+    }
+
+    // gets the type of the bullet
+    public BulletManager.bulletType GetBulletType()
+    {
+        return bulletType;
+    }
+
+    // sets the type of the bullet
+    public void SetBulletType(BulletManager.bulletType type)
+    {
+        this.bulletType = type;
     }
 }
