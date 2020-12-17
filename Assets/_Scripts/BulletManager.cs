@@ -54,17 +54,31 @@ using UnityEngine;
 //     
 // }
 
+
+
 [System.Serializable]
 public class BulletManager
 {
+    public enum bulletType {sphere, cube};
+
     // instance of bullet pool manager.
     private static BulletManager instance = null;
 
     public int MaxBullets = 50;
-    public GameObject bullet;
+    public GameObject bullet; // current bullet
+
+    public bulletType m_playerBulletType;
+
+    private GameObject bullet0; // bullet type 0
+    private GameObject bullet1; // bullet type 1
+
     public GameObject parentObject;
 
     public Queue<GameObject> m_playerBulletPool;
+
+    // bullet pools
+    public Queue<GameObject> bulletPool0;
+    public Queue<GameObject> bulletPool1;
 
     // constructor
     private BulletManager()
@@ -105,10 +119,19 @@ public class BulletManager
         // create empty Queue structures
         m_playerBulletPool = new Queue<GameObject>();
 
+        {
+            // loading bullet types
+            bullet0 = (GameObject)Resources.Load("Prefabs/Bullet");
+            bullet1 = (GameObject)Resources.Load("Prefabs/Bullet1");
+
+
+        }
+
         // loads a prefab
         if (bullet == null)
             bullet = (GameObject)Resources.Load("Prefabs/Bullet");
 
+        // bullet count
         for (int count = 0; count < MaxBullets; count++)
         {
             var tempPlayerBullet = MonoBehaviour.Instantiate(bullet);
