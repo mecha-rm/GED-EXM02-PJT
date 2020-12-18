@@ -36,8 +36,14 @@ public class GameStateLoader : DataManager
     // game state object
     public List<CubeBehaviour> blocks = new List<CubeBehaviour>();
 
+    // if 'true', then blocks are added as children.
+    public bool importAsChildren = false;
+
     // seraches for blocks if true.
     public bool findBlocks = true;
+    
+    // adds children of the object's list
+    public bool addBlockChildren = false;
 
     // Start is called before the first frame update
     void Start()
@@ -111,11 +117,67 @@ public class GameStateLoader : DataManager
         return newObject;
     }
 
+    // sets the file for the state loader
+    public void SetFile(string newFile)
+    {
+        file = newFile;
+        SetManagerFile(newFile);
+    }
 
+    // returns the file
+    public string GetFile()
+    {
+        return file;
+    }
+
+    // saves content
     public void SaveContent()
     {
-        // if(findBlocks)
-        //     cubes = FindObjectsOfType<CubeBehaviour>();
+        // if 'true', it finds all active blicks
+        if(findBlocks)
+        {
+            // gets all cubes in the scene (active and inactive)
+            CubeBehaviour[] cubes = FindObjectsOfType<CubeBehaviour>(true);
+
+            // adds blocks
+            for (int i = 0; i < cubes.Length; i++)
+            {
+                if (!blocks.Contains(cubes[i]))
+                    blocks.Add(cubes[i]);
+            }
+        }
+
+        // adds children of the parent object.
+        // if all blocks with the component were added, then this doesn't need to be called
+        if(!findBlocks && addBlockChildren)
+        {
+            // gets cubes that are children of the parent object.
+            CubeBehaviour[] cubes = GetComponentsInChildren<CubeBehaviour>(true);
+
+            // adds cubes
+            for (int i = 0; i < cubes.Length; i++)
+            {
+                if (!blocks.Contains(cubes[i]))
+                    blocks.Add(cubes[i]);
+            }
+        }
+
+        // SAVING DATA //
+        // for every block
+        foreach(CubeBehaviour cube in blocks)
+        {
+            // packs all objects for the data record
+            SerializablePrefabObject spo = PackPrefabGameObject(cube.prefab, cube.gameObject);
+            DataRecord dr; // data record
+            
+            // gets the data, and gives it to the manager
+            dr.data = SerializeObject(spo);
+            AddDataRecordToManager(dr);
+        }
+
+        // sets the file and saves teh data
+        SetManagerFile(file);
+        SaveDataRecords();
     }
 
     public void LoadContent()
