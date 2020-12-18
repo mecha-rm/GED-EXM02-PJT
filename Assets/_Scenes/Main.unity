@@ -545,6 +545,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 64794121-afb5-48fc-bd7e-bbb06f6f2729
     m_ActionName: Player/Mouse Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 579578806}
+        m_TargetAssemblyTypeName: PlayerBehaviour, Assembly-CSharp
+        m_MethodName: OnBulletTypeChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 76e88c64-e64e-4170-9ce6-4e9f632d90b3
+    m_ActionName: Player/Bullet Selection[/Keyboard/1,/Keyboard/numpad1,/Keyboard/2,/Keyboard/numpad2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 579578806}
+        m_TargetAssemblyTypeName: PlayerBehaviour, Assembly-CSharp
+        m_MethodName: OnUnspecificAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b66f91f7-97c2-4adc-958e-0bc0861529bc
+    m_ActionName: Player/Other[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -753,6 +785,7 @@ MonoBehaviour:
   body: {fileID: 579480856}
   cube: {fileID: 579480855}
   playerCam: {fileID: 580202292}
+  colManager: {fileID: 1957707761}
 --- !u!4 &579711284
 Transform:
   m_ObjectHideFlags: 0

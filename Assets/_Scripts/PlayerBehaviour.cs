@@ -32,8 +32,16 @@ public class PlayerBehaviour : MonoBehaviour
     // fire key
     private bool fireBullet;
 
-    void start()
+    // the collision manager
+    public CollisionManager colManager;
+    private bool resetBlocks = false; // variable for resetting blocks (stops it from being triggered twice)
+
+    // void start() // original name
+    void Start()
     {
+        // finds the collision manager in the scene.
+        if (colManager == null)
+            colManager = FindObjectOfType<CollisionManager>();
 
     }
 
@@ -256,6 +264,25 @@ public class PlayerBehaviour : MonoBehaviour
 
         // changes type
         BulletManager.GetInstance().SetCurrentBulletType(bulletInt);
+    }
+
+    // general function for other actions
+    public void OnUnspecificAction(InputAction.CallbackContext context)
+    {
+        // control
+        // this gets triggered twice 
+        switch(context.control.name)
+        {
+            case "r": // resets blocks
+                resetBlocks = !resetBlocks;
+                break;
+            default:
+                break;
+        }
+
+        // resets blocks if triggered.
+        if(resetBlocks)
+            colManager.ResetBlocks();
     }
 
     // fixed update

@@ -216,9 +216,16 @@ public class CollisionManager : MonoBehaviour
     //             cubes[i].gameObject.SetActive(true);
     //     }
     // }
-    // 
-    // public void OnResetScene()
-    // {
-    // 
-    // }
+
+    // resets the blocks
+    public void ResetBlocks()
+    {
+        // will need ot be changed for new input system
+        for (int i = 0; i < cubes.Length; i++) // re-enables all cubes
+        {
+            // this sometimes causes an error of the entity is already visible when stopping the game.
+            // i don't know how to fix this but it's not a system breaking issue.
+            cubes[i].gameObject.SetActive(true);
+        }
+    }
 }

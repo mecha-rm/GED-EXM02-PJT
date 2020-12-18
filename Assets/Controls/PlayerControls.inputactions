@@ -28,6 +28,14 @@
                     "expectedControlType": "Integer",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Other",
+                    "type": "PassThrough",
+                    "id": "b66f91f7-97c2-4adc-958e-0bc0861529bc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -182,6 +190,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Bullet Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "340800b1-161a-4067-946e-8b7d8cfdfeda",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Other",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
