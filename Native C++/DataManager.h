@@ -75,7 +75,7 @@ public:
 	int GetDataRecordCount() const;
 
 	// checks to see if there are any data records
-	bool IsEmpty() const;
+	bool HasDataRecords() const;
 
 	// gets the file tied to this record system.
 	const std::string& GetFile() const;
@@ -87,10 +87,10 @@ public:
 	bool FileAccessible() const;
 
 	// imports the records from the provided file
-	bool ImportRecords();
+	bool ImportDataRecords();
 
 	// exports records to saved file.
-	bool ExportRecords();
+	bool ExportDataRecords();
 
 private:
 	// file

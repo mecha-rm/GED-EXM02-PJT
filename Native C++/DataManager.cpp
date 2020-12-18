@@ -1,6 +1,7 @@
 #include "DataManager.h"
 
 #include <fstream>
+#include <sstream>
 
 // constructor
 DataManager::DataManager()
@@ -178,7 +179,7 @@ int DataManager::GetDataRecordCount() const
 }
 
 // checks to see if the data manager is empty
-bool DataManager::IsEmpty() const
+bool DataManager::HasDataRecords() const
 {
 	return dataRecords.empty();
 }
@@ -209,13 +210,97 @@ bool DataManager::FileAccessible() const
 	return !accessible;
 }
 
-bool DataManager::ImportRecords()
+// imports records
+bool DataManager::ImportDataRecords()
 {
-	return false;
+	// checks to see if the file can be accessed.
+	if (!FileAccessible())
+		return false;
+
+	// file, and the line from the file
+	std::ifstream fileStream(file);
+	std::vector<DataRecord> imports; // temporary vector for data manager
+	
+	// if the file isn't open
+	if (!fileStream.is_open())
+		return false;
+
+	// reads all records
+	/*
+	* The records are split into two portions: the record sizes, and the records themselves.
+	* The first portion lists the size of each record, which is extracted first.
+	* The second portion is the data itself, which is broken up using the sizes from the first portion.
+	* A dividing string is used to seperate these portions.
+	*/
+
+	// part 1 - gets sizes
+	{
+		std::string line = "";
+
+		// gets all sizes
+		while (std::getline(fileStream, line))
+		{
+			int tellg = fileStream.tellg();
+
+			// seperator reached
+			if (line == SEPERATOR_STR)
+				break;
+
+			// the new data record
+			DataRecord newRecord;
+
+			// gets the data size as an integer
+			std::stringstream ss; // the string stream.
+			ss.str(line); // puts line in stream
+			ss >> newRecord.size; // gets it as integer
+
+			imports.push_back(newRecord);
+		}
+	}
+
+	// seperator reached - pointer must be moved over by 1.
+	// in right spot
+	// char* test = new char[13];
+	// fileStream.read(test, 13);
+
+	// int tellg = fileStream.tellg();
+	// fileStream.seekg(sizeof(char), fileStream.cur);
+	// tellg = fileStream.tellg();
+
+	// now it gets the data from the file.
+	
+	// part 2 - gets all sizes
+	{
+		int index = 0;
+
+		// while not at the end of the file, and having records to get data from
+		while (!fileStream.eof() && index < imports.size())
+		{
+			// gets the record, and reads the data
+			DataRecord& dr = imports[index];
+			dr.data = new char[dr.size];
+			fileStream.read(dr.data, dr.size);
+			
+
+			index++;
+		}
+	}
+
+	// closes file
+	fileStream.close();
+
+	// combines vectors to perserve existing data
+	{
+		size_t oldSize = dataRecords.size();
+		dataRecords.reserve(oldSize + imports.size()); // allocate memory space
+		dataRecords.insert(dataRecords.begin() + oldSize, imports.begin(), imports.end()); // insert data
+	}
+
+	return true;
 }
 
 // exports the records
-bool DataManager::ExportRecords()
+bool DataManager::ExportDataRecords()
 {
 	// file stream
 	std::ofstream fileStream;
@@ -248,11 +333,21 @@ bool DataManager::ExportRecords()
 
 	// seperator
 	fileStream << SEPERATOR_STR << "\n";
+	// {
+	// 	// puts in the seperator character, removing the null-termination character
+	// 	char* arr = new char[SEPERATOR_STR.length() + 1];
+	// 	memcpy(arr, SEPERATOR_STR.data(), SEPERATOR_STR.length());
+	// 	arr[SEPERATOR_STR.length()] = '\n';
+	// 	fileStream << arr;
+	// 	delete[] arr;
+	// }
 
-	// record writing part 2 - data sizes
+	// record writing part 2 - data
 	for (DataRecord& dr : dataRecords)
 	{
-		fileStream << dr.data << "\n";
+		// prevents garbage data from being written
+		// fileStream << dr.data;
+		fileStream.write(dr.data, dr.size);
 	}
 
 	// closes the file

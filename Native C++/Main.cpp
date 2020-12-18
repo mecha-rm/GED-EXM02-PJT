@@ -35,13 +35,15 @@ int main()
         std::string str = "string test 1";
         char* charArr = new char[str.length()];
 
-        memcpy(charArr, str.c_str(), str.length()); // data must be copied
+        memcpy(charArr, str.c_str(), str.length()); // data must be copied since .c_str() and .data() are const.
 
         dm.AddDataRecord(charArr, str.length());
     }
 
     // char array test (uses dynamic variable since static would be deleted upon leaving)
     {
+        // the LEN needs to be 1 higher than what you're initializing it with.
+        // this is because it's adding a null-termination character at the end.
         const int LEN = 14;
         char* charArr = new char[LEN] {"string test 2"};
 
@@ -85,8 +87,48 @@ int main()
     std::cout << std::endl;
 
     std::cout << "Exporting Records..." << std::endl;
-    dm.ExportRecords();
+    dm.ExportDataRecords();
     std::cout << "Export Complete." << std::endl;
+
+    std::cout << "Deleting All Data..." << std::endl;
+    dm.DeleteAllDataRecords();
+    std::cout << "\nLoading Back in Data..." << std::endl;
+    dm.ImportDataRecords();
+    std::cout << "Data Import Complete." << std::endl;
+
+    std::cout << "\nPrinting Imported Data:" << std::endl;
+    {
+        char* data;
+        int size;
+        std::string str;
+
+        data = dm.GetData(0);
+        size = dm.GetDataSize(0);
+        str = std::string(data, size);
+
+        std::cout << str << " - size: " << size << std::endl;
+
+        data = dm.GetData(1);
+        size = dm.GetDataSize(1);
+        str = std::string(data, size);
+        std::cout << data << " - size: " << size << std::endl;
+
+        int x = 0;
+        data = dm.GetData(2);
+        memcpy(&x, data, sizeof(int));
+        std::cout << x << " - size: " << dm.GetDataSize(2) << std::endl;
+
+        float y = 0.0F;
+        data = dm.GetData(3);
+        memcpy(&y, data, sizeof(float));
+        std::cout << y << " - size: " << dm.GetDataSize(3) << std::endl;
+
+        double z = 0.0;
+        data = dm.GetData(4);
+        memcpy(&z, data, sizeof(double));
+        std::cout << z << " - size: " << dm.GetDataSize(4) << std::endl;
+    }
+
     system("pause");
 }
 
