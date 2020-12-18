@@ -28,6 +28,8 @@ public:
 	// adds a data record
 	void AddDataRecord(DataRecord& dataRecord);
 
+	// TODO: add insertion
+
 	// removes a data record via its data 
 	DataRecord RemoveDataRecord(char* data, int size);
 
@@ -55,10 +57,10 @@ public:
 	void DeleteAllDataRecords();
 
 	// checks to see if a provided data record is in the manager
-	bool ContainsDataRecord(char* data, int size) const;
+	bool ContainsDataRecord(const char* DATA, const int SIZE) const;
 
 	// checks to see if a provided data record is in the manager
-	bool ContainsDataRecord(const DataRecord& dataRecord) const;
+	bool ContainsDataRecord(const DataRecord& DATA_RECORD) const;
 
 	// gets the data at the requested index.
 	char* GetData(int index) const;
@@ -99,8 +101,8 @@ private:
 	// list of records
 	std::vector<DataRecord> dataRecords = std::vector<DataRecord>();
 
-	// seperation character
-	const std::string SEPERATOR_STR = "#####";
+	// seperation string
+	const std::string SEPERATOR_STR = "-";
 
 protected:
 

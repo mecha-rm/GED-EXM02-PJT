@@ -116,21 +116,21 @@ void DataManager::DeleteDataRecord(DataRecord& dataRecord)
 // deletes all records
 void DataManager::DeleteAllDataRecords()
 {
-	// deletes all data in the list, which is pointer data
+	// deletes all data in the list, which are all pointers.
 	for (DataRecord rec : dataRecords)
 		delete[] rec.data;
 
-	// clears list
+	// clears list, which deletes size information.
 	dataRecords.clear();
 }
 
 // checks to see if a data record is in the list
-bool DataManager::ContainsDataRecord(char* data, int size) const
+bool DataManager::ContainsDataRecord(const char* DATA, const int SIZE) const
 {
 	// checks for data record
-	for (DataRecord rec : dataRecords)
+	for (const DataRecord REC : dataRecords)
 	{
-		if (rec.data == data && rec.size == size)
+		if (REC.data == DATA && REC.size == SIZE)
 			return true;
 	}
 
@@ -138,9 +138,9 @@ bool DataManager::ContainsDataRecord(char* data, int size) const
 }
 
 // checks for data record
-bool DataManager::ContainsDataRecord(const DataRecord& dataRecord) const
+bool DataManager::ContainsDataRecord(const DataRecord& DATA_RECORD) const
 {
-	return ContainsDataRecord(dataRecord.data, dataRecord.size);
+	return ContainsDataRecord(DATA_RECORD.data, DATA_RECORD.size);
 }
 
 // data in manager
@@ -178,10 +178,10 @@ int DataManager::GetDataRecordCount() const
 	return dataRecords.size();
 }
 
-// checks to see if the data manager is empty
+// checks to see if the data manager has records
 bool DataManager::HasDataRecords() const
 {
-	return dataRecords.empty();
+	return !dataRecords.empty();
 }
 
 // gets the file for the data manager

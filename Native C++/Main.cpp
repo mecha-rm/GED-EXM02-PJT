@@ -23,7 +23,7 @@ int main()
     std::cout << "Data Management Test\n" << std::endl;
 
     DataManager dm;
-    std::string file = "test.txt";
+    std::string file = "test.dat"; // test.dat also works
     dm.SetFile(file);
 
     // string test
@@ -49,6 +49,8 @@ int main()
 
         DataRecord dr{ charArr, LEN};
         dm.AddDataRecord(dr);
+        dm.RemoveDataRecord(dr);
+        dm.AddDataRecord(dr);
     }
 
     // integer test
@@ -57,6 +59,9 @@ int main()
 
         char* data = new char[sizeof(int)];
         memcpy(data, &x, sizeof(int));
+
+        // containment check
+        std::cout << "Contains Int Record? " << std::boolalpha << dm.ContainsDataRecord(data, sizeof(int)) << std::endl;
 
         dm.AddDataRecord(data, sizeof(int));
     }
@@ -70,6 +75,9 @@ int main()
 
         DataRecord dr{ data, sizeof(x) };
         dm.AddDataRecord(dr);
+
+        // containment check
+        std::cout << "Contains Float Record? " << std::boolalpha << dm.ContainsDataRecord(dr) << std::endl;
     }
 
     // double test
