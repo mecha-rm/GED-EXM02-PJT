@@ -90,7 +90,7 @@ public class DataManager : MonoBehaviour
 	private static extern int HasDataRecords();
 
 	// gets the file tied to this record system.
-	[DllImport(DLL_NAME)]
+	[DllImport(DLL_NAME, EntryPoint = "GetFile")]
 	private static extern System.IntPtr GetFile();
 
 	// sets the file for this file system

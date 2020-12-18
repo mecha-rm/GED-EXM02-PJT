@@ -48,7 +48,7 @@ PLUGIN_API void DeleteDataRecordByIndex(int index)
 // deletes all data records
 PLUGIN_API void DeleteAllDataRecords()
 {
-	return dm.DeleteAllDataRecords();
+	dm.DeleteAllDataRecords();
 }
 
 // contains data record
@@ -130,11 +130,11 @@ PLUGIN_API int FileAccessible()
 // imports data records
 PLUGIN_API int ImportDataRecords()
 {
-	return dm.ImportDataRecords();
+	return (int)dm.ImportDataRecords();
 }
 
 // exports data records
 PLUGIN_API int ExportDataRecords()
 {
-	return dm.ExportDataRecords();
+	return (int)dm.ExportDataRecords();
 }

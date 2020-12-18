@@ -9,11 +9,11 @@ DataManager::DataManager()
 }
 
 // destructor - deletes all data
-DataManager::~DataManager()
-{
-	// deletes data in records
-	DeleteAllDataRecords();
-}
+// DataManager::~DataManager()
+// {
+// 	// deletes data in records
+// 	DeleteAllDataRecords();
+// }
 
 // adds a data record
 void DataManager::AddDataRecord(char* data, int size)
@@ -285,7 +285,7 @@ bool DataManager::ImportDataRecords()
 	std::ifstream fileStream(file);
 	std::vector<DataRecord> imports; // temporary vector for data manager
 	
-	// if the file isn't open
+	// if the file isn't open - may be unnecessary?
 	if (!fileStream.is_open())
 		return false;
 
@@ -378,7 +378,10 @@ bool DataManager::ExportDataRecords()
 
 	// if there are no values in the data records vector.
 	if (dataRecords.empty())
+	{
+		fileStream.close(); // closes the file stream
 		return false;
+	}
 
 
 	// writes all records

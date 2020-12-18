@@ -2008,7 +2008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveDataOnDestroy: 0
   deleteDataOnDestroy: 0
-  file: Assets/Resouces/Saves/save.dat
+  file: Assets/Resources/Saves/save.dat
   blocks: []
   loadAsChildren: 0
   findBlocks: 1

@@ -242,11 +242,19 @@ public class GameStateLoader : DataManager
             AddDataRecordToManager(dr);
         }
 
+        string getfile = GetManagerFile();
+        Debug.Log("File: " + getfile);
+        Debug.Log("Record Count: " + GetDataRecordAmount());
+
         // saves the data
         if (SaveDataRecords())
             Debug.Log("Content Saved");
         else
             Debug.LogError("Error. Content Not Saved");
+
+        // deletes all records - calling this function causes the game to crash, and I don't know why.
+        // either way, this function shouldn't be used.
+        // DeleteAllDataRecordsFromManager();
     }
     
 

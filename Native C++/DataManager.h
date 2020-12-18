@@ -20,7 +20,7 @@ public:
 	DataManager();
 
 	// destructor - deletes data
-	~DataManager();
+	// ~DataManager();
 
 	// adds a data record
 	void AddDataRecord(char* data, int size);
