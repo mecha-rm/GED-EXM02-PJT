@@ -61,3 +61,11 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Native C++
+Native C\+\+/x64/
+
+Native C\+\+/Debug/
+
+Native C\+\+/*.txt
+
+Native C\+\+/*.dat
