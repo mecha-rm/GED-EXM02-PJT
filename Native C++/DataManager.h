@@ -97,7 +97,10 @@ private:
 	std::string file = "";
 
 	// list of records
-	std::vector<DataRecord> dataRecords;
+	std::vector<DataRecord> dataRecords = std::vector<DataRecord>();
+
+	// seperation character
+	const std::string SEPERATOR_STR = "#####";
 
 protected:
 

@@ -11,12 +11,7 @@ DataManager::DataManager()
 DataManager::~DataManager()
 {
 	// deletes data in records
-	for (DataRecord& rec : dataRecords)
-	{
-		delete[] rec.data;
-	}
-
-	dataRecords.clear();
+	DeleteAllDataRecords();
 }
 
 // adds a data record
@@ -197,19 +192,71 @@ const std::string& DataManager::GetFile() const
 // sets the file for the data manager
 void DataManager::SetFile(std::string newFile)
 {
-	this->file = file;
+	file = newFile;
 }
 
 // checks to see if the file is accessible
 bool DataManager::FileAccessible() const
 {
-	std::ifstream file(file, std::ios::in); // opens file for reading
+	std::ifstream fs(file, std::ios::in); // opens file for reading
 	bool accessible; // checks to see if the file is accessible.
 
 	// if !file is true, then the file couldn't be opened.
-	accessible = !file;
-	file.close();
+	accessible = !fs;
+	fs.close();
 
 	// returns the opposite of 'accessible' since it's showing if the file is accessible.
 	return !accessible;
+}
+
+bool DataManager::ImportRecords()
+{
+	return false;
+}
+
+// exports the records
+bool DataManager::ExportRecords()
+{
+	// file stream
+	std::ofstream fileStream;
+
+	// opens the file and clears out existing content in it.
+	fileStream.open(file, std::ios::out | std::ios::trunc);
+
+	// if the file isn't open, return false.
+	if (!fileStream.is_open())
+		return false;
+
+	// if there are no values in the data records vector.
+	if (dataRecords.empty())
+		return false;
+
+
+	// writes all records
+	/*
+	* The records are split into two portions: the record sizes, and the records themselves.
+	* The first portion lists the size of each record, which will be used for extracting them later.
+	* The second portion is the data itself, which is broken up according to the first portion.
+	* A dividing string is used to seperate these portions.
+	*/
+
+	// record writing part 1 - data sizes
+	for (DataRecord& dr : dataRecords)
+	{
+		fileStream << std::to_string(dr.size) << "\n";
+	}
+
+	// seperator
+	fileStream << SEPERATOR_STR << "\n";
+
+	// record writing part 2 - data sizes
+	for (DataRecord& dr : dataRecords)
+	{
+		fileStream << dr.data << "\n";
+	}
+
+	// closes the file
+	fileStream.close();
+
+	return true;
 }
