@@ -73,6 +73,7 @@ public:
 	// returns empty data record if invalid
 	DataRecord GetDataRecord(int index) const;
 
+	// TODO: test the EditDataRecord functions.
 	// edits the data record's data. This does not delete the data.
 	void EditDataRecord(int index, char* newData);
 
