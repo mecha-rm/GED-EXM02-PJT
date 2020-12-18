@@ -52,6 +52,9 @@ public class Contact : IEquatable<Contact>
 [System.Serializable]
 public class CubeBehaviour : MonoBehaviour
 {
+    // extra - saves prefab (include file path as well)
+    public string prefab;
+
     [Header("Cube Attributes")]
     public Vector3 size;
     public Vector3 max;
@@ -63,7 +66,6 @@ public class CubeBehaviour : MonoBehaviour
     private MeshFilter meshFilter;
     public Bounds bounds;
     public bool isGrounded;
-
 
     // Start is called before the first frame update
     void Start()
