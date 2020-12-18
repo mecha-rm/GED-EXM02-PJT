@@ -73,6 +73,20 @@ public:
 	// returns empty data record if invalid
 	DataRecord GetDataRecord(int index) const;
 
+	// edits the data record's data. This does not delete the data.
+	void EditDataRecord(int index, char* newData);
+
+	// edits the data record's size
+	void EditDataRecord(int index, int newSize);
+
+	// edits a data record, providing it with new values. This does NOT delete the data it's replacing.
+	void EditDataRecord(int index, char* newData, int newSize);
+	
+	// edits the data by replacing the data and size of the requested data record with that of the provided record.
+	// keep in mind that this is not copying the data or deleting the existing data, just changing pointers.
+	void EditDataRecord(int index, const DataRecord& DATA_RECORD);
+
+
 	// gets the amount of data records
 	int GetDataRecordCount() const;
 

@@ -18,6 +18,7 @@ DataManager::~DataManager()
 // adds a data record
 void DataManager::AddDataRecord(char* data, int size)
 {
+	// maybe check for nullptr data?
 	dataRecords.push_back(DataRecord{ data, size });
 }
 
@@ -165,11 +166,56 @@ int DataManager::GetDataSize(int index) const
 // gets data record
 DataRecord DataManager::GetDataRecord(int index) const
 {
+	// because of the 'else' return, the function doesn't return a reference.
+	// this should likely be changed for later.
+
 	// index validity check
 	if (index >= 0 && index < dataRecords.size())
 		return dataRecords[index];
 	else
 		return DataRecord();
+}
+
+// edits the data record
+void DataManager::EditDataRecord(int index, char* newData)
+{
+	// index validity check
+	if (index < 0 || index >= dataRecords.size())
+		return;
+	else
+		dataRecords[index].data = newData;
+}
+
+// edits the data record
+void DataManager::EditDataRecord(int index, int newSize)
+{
+	// index validity check
+	if (index < 0 || index >= dataRecords.size())
+		return;
+	else
+		dataRecords[index].size = newSize;
+}
+
+// edit the data record
+void DataManager::EditDataRecord(int index, char* newData, int newSize)
+{
+	// index is invalid
+	if (index < 0 || index >= dataRecords.size())
+		return;
+
+	dataRecords[index].data = newData;
+	dataRecords[index].size = newSize;
+}
+
+// edits the data
+void DataManager::EditDataRecord(int index, const DataRecord& DATA_RECORD)
+{
+	// index is invalid
+	if (index < 0 || index >= dataRecords.size())
+		return;
+
+	dataRecords[index].data = DATA_RECORD.data;
+	dataRecords[index].size = DATA_RECORD.size;
 }
 
 // gets amount of data records
