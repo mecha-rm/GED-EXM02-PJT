@@ -237,7 +237,7 @@ public class DataManager : MonoBehaviour
 	}
 
 	// checks to see if the set file is available for reading and writing.
-	public bool ManagerFileAvailable()
+	public bool FileAvailable()
 	{
 		int res = FileAccessible();
 		return (res == 0) ? false : true;

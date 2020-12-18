@@ -22,6 +22,8 @@ public struct Quat { public float x, y, z, w; };
 public struct SerializablePrefabObject
 {
     public string prefab; // include path from Prefabs folder.
+    public bool active; // if object was active or not
+
     public Vec3 position;
     public Quat rotation;
     public Vec3 scale;
@@ -37,7 +39,7 @@ public class GameStateLoader : DataManager
     public List<CubeBehaviour> blocks = new List<CubeBehaviour>();
 
     // if 'true', then blocks are added as children.
-    public bool importAsChildren = false;
+    public bool loadAsChildren = false;
 
     // seraches for blocks if true.
     public bool findBlocks = true;
@@ -81,6 +83,7 @@ public class GameStateLoader : DataManager
 
         // prefab
         so.prefab = prefab;
+        so.active = go.activeSelf;
 
         // transformation information
         // position
@@ -106,7 +109,15 @@ public class GameStateLoader : DataManager
     public GameObject UnpackPrefabGameObject(SerializablePrefabObject so)
     {
         // loads the new object
-        GameObject newObject = Instantiate((GameObject)Resources.Load("Prefabs/" + so.prefab));
+        object prefab = Resources.Load("Prefabs/" + so.prefab);
+        GameObject newObject;
+
+        if (prefab != null)
+            newObject = Instantiate((GameObject)prefab); // instantiate game object
+        else
+            newObject = new GameObject(); // empty game object otherwise
+        
+        newObject.SetActive(so.active);
 
         // transformation information
         // position
@@ -130,11 +141,67 @@ public class GameStateLoader : DataManager
         return file;
     }
 
+    // loads content from file
+    public void LoadContent()
+    {
+        // loads content
+        SetManagerFile(file);
+
+        // if the file is not available, do not save content.
+        if (!FileAvailable())
+        {
+            Debug.LogError("File Not Available. Load Failed.");
+            return;
+        }
+
+        // loads the data records
+        if (LoadDataRecords())
+        {
+            Debug.Log("Content Loaded");
+        }
+        else
+        {
+            Debug.LogError("Error. Content Not Loaded");
+            return;
+        }
+
+        // gets the amount of data
+        int dataCount = GetDataRecordAmount();
+
+        // loads all objects
+        for (int i = 0; i < dataCount; i++)
+        {
+            // gets the data, unpacks it, then generates a game object.
+
+            DataRecord dr = GetDataRecordFromManager(i);
+            object unpacked = DeserializeObject(dr.data);
+            SerializablePrefabObject so = (SerializablePrefabObject)unpacked;
+            GameObject newObject = UnpackPrefabGameObject(so);
+
+            // if the game object should be loaded as a child of this game object.
+            if (loadAsChildren)
+                newObject.transform.parent = gameObject.transform;
+        }
+
+    }
+
+
     // saves content
     public void SaveContent()
     {
+        // sets the manager file
+        SetManagerFile(file);
+
+        // the file will be generated if it doesn't exist
+        // if the file is not available, do not save content.
+        // if (!FileAvailable())
+        // {
+        //     Debug.LogError("File Not Accessible. Save Failed.");
+        //     return;
+        // }
+            
         // if 'true', it finds all active blicks
-        if(findBlocks)
+        if (findBlocks)
         {
             // gets all cubes in the scene (active and inactive)
             CubeBehaviour[] cubes = FindObjectsOfType<CubeBehaviour>(true);
@@ -175,15 +242,13 @@ public class GameStateLoader : DataManager
             AddDataRecordToManager(dr);
         }
 
-        // sets the file and saves teh data
-        SetManagerFile(file);
-        SaveDataRecords();
+        // saves the data
+        if (SaveDataRecords())
+            Debug.Log("Content Saved");
+        else
+            Debug.LogError("Error. Content Not Saved");
     }
-
-    public void LoadContent()
-    {
-
-    }
+    
 
     // Update is called once per frame
     void Update()

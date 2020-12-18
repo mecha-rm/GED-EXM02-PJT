@@ -36,12 +36,20 @@ public class PlayerBehaviour : MonoBehaviour
     public CollisionManager colManager;
     private bool resetBlocks = false; // variable for resetting blocks (stops it from being triggered twice)
 
+    // the game state loader
+    public GameStateLoader gsLoader;
+    private bool saveData, loadData; // save and load variables
+
     // void start() // original name
     void Start()
     {
         // finds the collision manager in the scene.
         if (colManager == null)
             colManager = FindObjectOfType<CollisionManager>();
+
+        // if the game state loader has not been set, it searches for one.
+        if (gsLoader == null)
+            gsLoader = FindObjectOfType<GameStateLoader>();
 
     }
 
@@ -276,6 +284,21 @@ public class PlayerBehaviour : MonoBehaviour
             case "r": // resets blocks
                 resetBlocks = !resetBlocks;
                 break;
+
+            case "i": // import files
+                loadData = !loadData;
+
+                if (loadData) // if data can be loaded.
+                    gsLoader.LoadContent();
+                break;
+
+            case "o": // export files
+                saveData = !saveData;
+
+                if (saveData) // if data should be saved.
+                    gsLoader.SaveContent();
+                break;
+
             default:
                 break;
         }

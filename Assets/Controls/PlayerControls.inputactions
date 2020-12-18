@@ -203,6 +203,28 @@
                     "action": "Other",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4923c98-d297-46bb-9c85-333ea4e56e37",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Other",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21cd905c-66a2-483c-b13d-2356d1f02376",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Other",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
