@@ -28,6 +28,24 @@ void DataManager::AddDataRecord(DataRecord& dataRecord)
 	dataRecords.push_back(dataRecord);
 }
 
+// inserts a data record
+void DataManager::InsertDataRecord(int index, char* data, int size)
+{
+	DataRecord dataRecord { data, size }; // creates the record
+	InsertDataRecord(index, dataRecord); // inserts it
+}
+
+// inserts a data record
+void DataManager::InsertDataRecord(int index, DataRecord& dataRecord)
+{
+	if (index < 0) // goes at start of list
+		dataRecords.insert(dataRecords.begin(), dataRecord);
+	else if (index >= dataRecords.size()) // goes at end of list
+		dataRecords.push_back(dataRecord);
+	else // goes into provided index
+		dataRecords.insert(dataRecords.begin() + index, dataRecord);
+}
+
 // removes a record by its data and size
 DataRecord DataManager::RemoveDataRecord(char* data, int size)
 {

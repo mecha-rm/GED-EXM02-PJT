@@ -8,6 +8,12 @@ PLUGIN_API void AddDataRecord(char* data, int size)
 	dm.AddDataRecord(data, size);
 }
 
+// inserts a record
+PLUGIN_API void InsertDataRecord(int index, char* data, int size)
+{
+	dm.InsertDataRecord(index, data, size);
+}
+
 // removes record
 PLUGIN_API void RemoveDataRecord(char* data, int size)
 {

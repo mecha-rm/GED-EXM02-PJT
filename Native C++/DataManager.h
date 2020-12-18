@@ -28,7 +28,11 @@ public:
 	// adds a data record
 	void AddDataRecord(DataRecord& dataRecord);
 
-	// TODO: add insertion
+	// insert a data record
+	void InsertDataRecord(int index, char* data, int size);
+
+	// insert a data record
+	void InsertDataRecord(int index, DataRecord& dataRecord);
 
 	// removes a data record via its data 
 	DataRecord RemoveDataRecord(char* data, int size);

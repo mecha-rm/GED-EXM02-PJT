@@ -9,6 +9,9 @@ extern "C" // convert to C code.
 	// adds a data record
 	PLUGIN_API void AddDataRecord(char* data, int size);
 
+	// inserts the record
+	PLUGIN_API void InsertDataRecord(int index, char* data, int size);
+
 	// removes a data record via its data 
 	PLUGIN_API void RemoveDataRecord(char* data, int size);
 

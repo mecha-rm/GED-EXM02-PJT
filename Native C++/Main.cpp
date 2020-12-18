@@ -27,7 +27,7 @@ int main()
     std::string file = "test.dat"; // test.dat also works
     dm.SetFile(file);
 
-    // string test
+    // string test 
     {
         // this wouldn't work since the data is deleted upon leaving this bracket set.
         // const int LEN = 12;
@@ -64,7 +64,8 @@ int main()
         // containment check
         std::cout << "Contains Int Record? " << std::boolalpha << dm.ContainsDataRecord(data, sizeof(int)) << std::endl;
 
-        dm.AddDataRecord(data, sizeof(int));
+        // dm.AddDataRecord(data, sizeof(int));
+        dm.InsertDataRecord(dm.GetDataRecordCount(), data, sizeof(int)); // insertion test
     }
 
     // float test
@@ -75,7 +76,8 @@ int main()
         memcpy(data, &x, sizeof(x));
 
         DataRecord dr{ data, sizeof(x) };
-        dm.AddDataRecord(dr);
+        // dm.AddDataRecord(dr);
+        dm.InsertDataRecord(dm.GetDataRecordCount(), dr); // insertion test
 
         // containment check
         std::cout << "Contains Float Record? " << std::boolalpha << dm.ContainsDataRecord(dr) << std::endl;
