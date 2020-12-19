@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 600, y: 60}
+  m_AnchoredPosition: {x: 0, y: 280}
+  m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &56628211
 MonoBehaviour:
@@ -198,10 +198,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 19
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -209,8 +209,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "I to Import Stage from File | O to Export Stage to File | \nR to Refresh
-    Scene | C to Clear Map | B to Return to Start"
+  m_Text: "I - Import Stage from File | O - Export Stage to File| [G] - Randomize
+    Level | \nR to Refresh Scene | C to Clear Map | B to Return to Start"
 --- !u!222 &56628213
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1399,7 +1399,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465855746}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee447d0247286e148949a3e4f87f8757, type: 3}
   m_Name: 
@@ -1757,6 +1757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockB
       objectReference: {fileID: 0}
+    - target: {fileID: 605954067457522941, guid: 84ff77f17f6ad404fb3e2e361db31206, type: 3}
+      propertyPath: gravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 605954067457522942, guid: 84ff77f17f6ad404fb3e2e361db31206, type: 3}
       propertyPath: prefab
       value: BlockB
@@ -1866,6 +1870,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4548469154128853140, guid: 411e8e067fb664747bfbeedbd0b754db, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 411e8e067fb664747bfbeedbd0b754db, type: 3}
 --- !u!1001 &7523472444130092710
@@ -1879,10 +1887,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7523472443619036094, guid: 74f085ae25bb1f142aec2ed13c3ddec9, type: 3}
+      propertyPath: gravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7523472443619134736, guid: 74f085ae25bb1f142aec2ed13c3ddec9, type: 3}
       propertyPath: colManager
       value: 
       objectReference: {fileID: 1957707761}
+    - target: {fileID: 7523472443619134736, guid: 74f085ae25bb1f142aec2ed13c3ddec9, type: 3}
+      propertyPath: levelGenerator
+      value: 
+      objectReference: {fileID: 1465855749}
+    - target: {fileID: 7523472443619134736, guid: 74f085ae25bb1f142aec2ed13c3ddec9, type: 3}
+      propertyPath: gsLoader
+      value: 
+      objectReference: {fileID: 1465855748}
     - target: {fileID: 7523472443619268498, guid: 74f085ae25bb1f142aec2ed13c3ddec9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.372
@@ -1983,6 +2003,10 @@ PrefabInstance:
     - target: {fileID: 7721416252850746038, guid: ecbcd8ed54189514387f91910521427a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721416252850746040, guid: ecbcd8ed54189514387f91910521427a, type: 3}
+      propertyPath: gravityScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7721416252850746041, guid: ecbcd8ed54189514387f91910521427a, type: 3}
       propertyPath: prefab

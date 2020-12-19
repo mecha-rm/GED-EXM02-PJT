@@ -68,8 +68,8 @@ public class CubeBehaviour : MonoBehaviour
     public bool isGrounded;
 
     // EX - death plane for respawning
-    private float deathPlaneY = -50.0F;
-    private bool useDeathPlane = true;
+    public static float deathPlaneY = -50.0F;
+    public static bool useDeathPlane = true;
 
     // spawn position
     public Vector3 spawnPos;
@@ -87,6 +87,24 @@ public class CubeBehaviour : MonoBehaviour
 
         if (startupPosSpawn) // saves current positon as startup spawn
             spawnPos = gameObject.transform.position;
+    }
+
+    // returns the spawn position
+    public Vector3 GetSpawnPosition()
+    {
+        return spawnPos;
+    }
+
+    // changes spawn position
+    public void SetSpawnPosition(Vector3 newSpawn)
+    {
+        spawnPos = newSpawn;
+    }
+
+    // resets spawn position to current position
+    public void SetSpawnPosToCurrentPos()
+    {
+        spawnPos = transform.position;
     }
 
     // Update is called once per frame
@@ -122,5 +140,7 @@ public class CubeBehaviour : MonoBehaviour
         // reset spawn position if hit death plane.
         if (transform.position.y <= deathPlaneY)
             transform.position = spawnPos;
+
+
     }
 }

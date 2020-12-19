@@ -108,10 +108,14 @@ public class LevelGenerator : MonoBehaviour
     }
 
     // generates the tiles
-    private void GenerateLevel()
+    public void GenerateLevel()
     {
         // if there are no tile
         if (blockOptions.Count == 0)
+            return;
+
+        // area size not set
+        if (areaSize.x == 0 && areaSize.z == 0)
             return;
 
         // blocks to be positioned.
@@ -138,6 +142,7 @@ public class LevelGenerator : MonoBehaviour
 
             // gets the size of the object
             offset = renderer.bounds.size; // / 2.0F; // this assumes the center is the middle. 
+            offset += new Vector3(2, 2, 2);
         }
 
         // VARIABLES
@@ -284,6 +289,7 @@ public class LevelGenerator : MonoBehaviour
                         // moves to align object with origin
                         newPos -= Vector3.Scale(Vector3.Scale(areaSize, areaOrigin), offset);
 
+
                         // generates new position
                         // Vector3 newPos = Vector3.Scale(Vector3.Scale(areaSize, areaOrigin), offset);
 
@@ -310,6 +316,9 @@ public class LevelGenerator : MonoBehaviour
                                 go.transform.parent = blockParent.transform;
                             }
                         }
+
+                        // resets spawn position to the object's new position.
+                        go.GetComponent<CubeBehaviour>().SetSpawnPosToCurrentPos();
 
                         currBlock++;
 
@@ -340,34 +349,62 @@ public class LevelGenerator : MonoBehaviour
                 GameObject player = GameObject.FindGameObjectWithTag("Player"); // player object
                 GameObject ground = GameObject.FindGameObjectWithTag("Ground"); // ground object
 
-                if (ground != null) // ground exists
+                // Ground
+                // creates ground if it doesn't exist
+                if (ground == null)
+                {
+                    ground = Instantiate((GameObject)Resources.Load("Prefabs/Ground"));
+
+                    // adds parent to new ground.
+                    if (ground != null && addParents && blockParent != null)
+                    {
+                        ground.transform.parent = blockParent.transform;
+                    }
+                }
+
+                // Ground
+                if(ground != null)
                 {
                     MeshRenderer groundMr = ground.GetComponent<MeshRenderer>(); // gets the ground's mesh renderer
 
                     if (groundMr != null) // mesh renderer not set.
                     {
                         // new position for ground
-                        Vector3 newPos = Vector3.Scale(Vector3.Scale(areaSize, areaOrigin), offset); // new position
+                        // Vector3 newPos = Vector3.Scale(Vector3.Scale(areaSize, areaOrigin), offset); // new position
+                        // newPos.y = 0 - areaOrigin.y * offset.y;
+
+                        // generates new base position
+                        Vector3 newPos = new Vector3(offset.x * areaSize.x / 2, 0, offset.z * areaSize.z / 2);
+
+                        // moves to align object with origin
+                        newPos -= Vector3.Scale(Vector3.Scale(areaSize, areaOrigin), offset);
+
 
                         // the new scale, which is multiplied by the offset.
                         // scale = desired size / current size
                         Vector3 newScale = new Vector3(
-                            areaSize.x * offset.x / groundMr.bounds.size.x,
-                            areaSize.y * offset.y / groundMr.bounds.size.y,
-                            areaSize.z * offset.z / groundMr.bounds.size.z
+                            areaSize.x * offset.x / groundMr.bounds.size.x * ground.transform.localScale.x,
+                            areaSize.y * offset.y / groundMr.bounds.size.y * ground.transform.localScale.y,
+                            areaSize.z * offset.z / groundMr.bounds.size.z * ground.transform.localScale.z
                             );
 
-                        // increases scale by 1 to ensure extra space.
-                        newScale += new Vector3(1, 1, 1);
+                        // y scale should stay the same.
+                        newScale.y = ground.transform.localScale.y;
+
+                        // increases scale by 3 to ensure extra space.
+                        newScale += new Vector3(3, 0, 3);
 
                         // sets position and scale
                         ground.transform.position = newPos;
                         ground.transform.localScale = newScale;
+
+                        // moves the death plane
+                        CubeBehaviour.deathPlaneY = newPos.y += CubeBehaviour.deathPlaneY;
                     }
                 }
                 
 
-                // player found
+                // Player
                 if(player != null)
                 {
                     Vector3 newPos;
@@ -380,7 +417,8 @@ public class LevelGenerator : MonoBehaviour
                     // offset for origin
                     newPos -= Vector3.Scale(Vector3.Scale(areaSize, areaOrigin), offset);
 
-                    player.transform.position = newPos;
+                    player.transform.position = newPos; // sets new position
+                    player.GetComponent<CubeBehaviour>().SetSpawnPosToCurrentPos(); // resets to current position
                 }
             }
 

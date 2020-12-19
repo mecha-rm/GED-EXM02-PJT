@@ -328,6 +328,8 @@ public class CollisionManager : MonoBehaviour
             // this sometimes causes an error of the entity is already visible when stopping the game.
             // i don't know how to fix this but it's not a system breaking issue.
             cubes[i].gameObject.SetActive(true);
+            cubes[i].gameObject.GetComponent<RigidBody3D>().Stop(); // gets rid of all y velocity.
         }
     }
+
 }

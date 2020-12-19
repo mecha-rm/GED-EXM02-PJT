@@ -116,4 +116,4 @@ MonoBehaviour:
   isColliding: 0
   collisionNormal: {x: 0, y: 0, z: 0}
   penetration: 0
-  bulletType: 0
+  bulletType: 1

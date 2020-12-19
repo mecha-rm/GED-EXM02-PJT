@@ -125,3 +125,5 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  startupPosSpawn: 1

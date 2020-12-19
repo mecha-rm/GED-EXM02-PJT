@@ -135,6 +135,7 @@ MonoBehaviour:
   targetDirection: {x: 0, y: 0}
   targetCharacterDirection: {x: 0, y: 0}
   characterBody: {fileID: 0}
+  cursorVisible: 0
 --- !u!114 &7523472443619036090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +326,8 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  startupPosSpawn: 1
 --- !u!114 &7523472443619134736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +350,7 @@ MonoBehaviour:
   playerCam: {fileID: 7523472443617659282}
   colManager: {fileID: 0}
   gsLoader: {fileID: 0}
+  levelGenerator: {fileID: 0}
 --- !u!114 &7523472443619036083
 MonoBehaviour:
   m_ObjectHideFlags: 0

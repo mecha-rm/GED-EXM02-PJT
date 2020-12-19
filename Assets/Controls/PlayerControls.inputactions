@@ -25,7 +25,7 @@
                     "name": "Bullet Selection",
                     "type": "PassThrough",
                     "id": "76e88c64-e64e-4170-9ce6-4e9f632d90b3",
-                    "expectedControlType": "Integer",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
@@ -195,6 +195,50 @@
                 },
                 {
                     "name": "",
+                    "id": "83eecd2b-69d8-4187-9a90-85c8fb17ae3e",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Bullet Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "560fa29e-da30-459e-b810-fcdb40b3840d",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Bullet Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f88a1e1e-65fd-4348-b90f-32c480755fc4",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Bullet Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "732993e1-2e3a-4518-9ee8-1f71ffa548b8",
+                    "path": "<Keyboard>/numpad4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Bullet Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "340800b1-161a-4067-946e-8b7d8cfdfeda",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -241,6 +285,17 @@
                     "name": "",
                     "id": "03160d6b-86f0-48bd-95b9-f7d22bb3f49c",
                     "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Other",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7528443b-b6e2-4ab1-86e9-f600cfac8b0e",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -42,6 +42,10 @@ public class PlayerBehaviour : MonoBehaviour
     private bool saveData, loadData; // save and load variables
     private bool clearCubes;
 
+    // the level generator manager
+    public LevelGenerator levelGenerator;
+    private bool genRandLvl;
+
     // void start() // original name
     void Start()
     {
@@ -52,6 +56,9 @@ public class PlayerBehaviour : MonoBehaviour
         // if the game state loader has not been set, it searches for one.
         if (gsLoader == null)
             gsLoader = FindObjectOfType<GameStateLoader>();
+
+        if (levelGenerator == null)
+            levelGenerator = FindObjectOfType<LevelGenerator>();
     }
 
     // Update is called once per frame
@@ -267,6 +274,16 @@ public class PlayerBehaviour : MonoBehaviour
                 bulletInt = 1;
                 break;
 
+            case "3":
+            case "numpad3":
+                bulletInt = 2;
+                break;
+
+            case "4":
+            case "numpad4":
+                bulletInt = 3;
+                break;
+
             default:
                 break;
         }
@@ -326,6 +343,14 @@ public class PlayerBehaviour : MonoBehaviour
 
             case "b": // back to start
                 UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
+                break;
+
+            case "g": // generate random level
+                genRandLvl = !genRandLvl;
+
+                if(genRandLvl)
+                    levelGenerator.GenerateLevel();
+ 
                 break;
 
             default:

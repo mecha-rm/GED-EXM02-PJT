@@ -59,8 +59,8 @@ using UnityEngine;
 [System.Serializable]
 public class BulletManager
 {
-    public enum bulletType {sphere, cube};
-    public const int BULLET_TYPE_COUNT = 2;
+    public enum bulletType {sphere, cube, capsule, cylinder};
+    public const int BULLET_TYPE_COUNT = 4;
 
     // instance of bullet pool manager.
     private static BulletManager instance = null;
@@ -135,6 +135,14 @@ public class BulletManager
 
                 case ((int)bulletType.cube): // cube base
                     bulletBases.Add((GameObject)Resources.Load("Prefabs/Bullet1"));
+                    break;
+
+                case ((int)bulletType.capsule): // capsule base
+                    bulletBases.Add((GameObject)Resources.Load("Prefabs/Bullet2"));
+                    break;
+
+                case ((int)bulletType.cylinder): // cylinder base
+                    bulletBases.Add((GameObject)Resources.Load("Prefabs/Bullet3"));
                     break;
             }
         }
