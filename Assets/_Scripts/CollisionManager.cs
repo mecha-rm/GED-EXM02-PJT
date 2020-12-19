@@ -205,19 +205,25 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    // clears the cube list
+    public void ClearCubeList()
+    {
+        Array.Clear(cubes, 0, cubes.Length);
+        Array.Resize<CubeBehaviour>(ref cubes, 0);
+    }
+
     // destroys all cubes in the cube list.
     public void DestroyCubesInList()
     {
-        for (int i = 0; i < cubes.Length; i++)
-            Destroy(cubes[i].gameObject);
-
-        cubes[0] = null;
+        Array.Clear(cubes, 0, cubes.Length); // deletes data
+        Array.Resize<CubeBehaviour>(ref cubes, 0); // brings it down to 0.
     }
 
     // refreshes the list of cubes
     public void RefreshCubeList()
     {
-        cubes = FindObjectsOfType<CubeBehaviour>();
+        Array.Clear(cubes, 0, cubes.Length); // clears array
+        cubes = FindObjectsOfType<CubeBehaviour>(); // fills array again
     }
 
     // resets the whole round
