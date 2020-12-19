@@ -27,11 +27,22 @@ public class CollisionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // indexes to be deleted.
+        Stack<int> cubeDels = new Stack<int>();
+
         spheres = FindObjectsOfType<BulletBehaviour>();
 
         // check each AABB with every other AABB in the scene
         for (int i = 0; i < cubes.Length; i++)
         {
+            // if the cube behaviour does not exist, it gets marked for removal.
+            if(cubes[i] == null)
+            {
+                cubeDels.Push(i);
+                continue;
+            }
+
+            // AABB check.
             for (int j = 0; j < cubes.Length; j++)
             {
                 if (i != j)
@@ -40,6 +51,14 @@ public class CollisionManager : MonoBehaviour
                 }
             }
         }
+
+        // while there are still indexes to remove.
+        while(cubeDels.Count > 0)
+        {
+            RemoveCubeFromList(cubeDels.Peek()); // removes data
+            cubeDels.Pop(); // removes index
+        }
+
 
         // Check each sphere against each AABB in the scene
         foreach (var sphere in spheres) // bullet collision with cubes
@@ -57,8 +76,12 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    // Sphere AABB
     public static void CheckSphereAABB(BulletBehaviour s, CubeBehaviour b)
     {
+        // if either is set to null, don't continue.
+        if (s == null || b == null)
+            return;
 
         // get box closest point to sphere center by clamping
         var x = Mathf.Max(b.min.x, Mathf.Min(s.transform.position.x, b.max.x));
@@ -126,8 +149,13 @@ public class CollisionManager : MonoBehaviour
     }
 
 
+    // AABB check
     public static void CheckAABBs(CubeBehaviour a, CubeBehaviour b)
     {
+        // if either is set to null, don't continue.
+        if (a == null || b == null)
+            return;
+
         Contact contactB = new Contact(b);
 
         if ((a.min.x <= b.max.x && a.max.x >= b.min.x) &&

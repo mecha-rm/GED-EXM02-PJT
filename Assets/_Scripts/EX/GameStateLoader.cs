@@ -219,7 +219,8 @@ public class GameStateLoader : DataManager
             // adds blocks
             for (int i = 0; i < cubes.Length; i++)
             {
-                if (!blocks.Contains(cubes[i]))
+                // the player shouldn't be added.
+                if (!blocks.Contains(cubes[i]) && cubes[i].tag != "Player")
                     blocks.Add(cubes[i]);
             }
         }
