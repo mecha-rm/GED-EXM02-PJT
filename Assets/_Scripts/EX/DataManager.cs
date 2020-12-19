@@ -17,7 +17,7 @@ public class DataManager : MonoBehaviour
 	// if 'true', the data is saved upon the destruction of this manager.
 	public bool saveDataOnDestroy = false;
 	// if 'true', the data is destroyed when the game object is deleted.
-	public bool deleteDataOnDestroy = false;
+	public bool deleteDataOnDestroy = true;
 
 	// dll
     private const string DLL_NAME = "GED-EXM02-DLL";

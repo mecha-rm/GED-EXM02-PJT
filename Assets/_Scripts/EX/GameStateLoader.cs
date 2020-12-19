@@ -191,6 +191,8 @@ public class GameStateLoader : DataManager
         if (cm != null)
             cm.RefreshCubeList(true);
 
+        // clears ut the record data
+        ClearAllDataRecordsFromManager();
     }
 
 

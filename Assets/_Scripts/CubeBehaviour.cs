@@ -67,6 +67,14 @@ public class CubeBehaviour : MonoBehaviour
     public Bounds bounds;
     public bool isGrounded;
 
+    // EX - death plane for respawning
+    private float deathPlaneY = -50.0F;
+    private bool useDeathPlane = true;
+
+    // spawn position
+    public Vector3 spawnPos;
+    public bool startupPosSpawn = true; // if 'ture', the start up position is the spawn position.
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +84,9 @@ public class CubeBehaviour : MonoBehaviour
         bounds = meshFilter.mesh.bounds;
         size = bounds.size;
 
+
+        if (startupPosSpawn) // saves current positon as startup spawn
+            spawnPos = gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -84,6 +95,12 @@ public class CubeBehaviour : MonoBehaviour
         max = Vector3.Scale(bounds.max, transform.localScale) + transform.position;
         min = Vector3.Scale(bounds.min, transform.localScale) + transform.position;
 
+    }
+
+    // death check
+    void FixedUpdate()
+    {
+        DeathCheck();
     }
 
     private void OnDrawGizmos()
@@ -96,4 +113,14 @@ public class CubeBehaviour : MonoBehaviour
         }
     }
 
+    // checks to see if the player is in the death zone
+    private void DeathCheck()
+    {
+        if (!useDeathPlane)
+            return;
+
+        // reset spawn position if hit death plane.
+        if (transform.position.y <= deathPlaneY)
+            transform.position = spawnPos;
+    }
 }

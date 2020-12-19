@@ -52,7 +52,6 @@ public class PlayerBehaviour : MonoBehaviour
         // if the game state loader has not been set, it searches for one.
         if (gsLoader == null)
             gsLoader = FindObjectOfType<GameStateLoader>();
-
     }
 
     // Update is called once per frame
