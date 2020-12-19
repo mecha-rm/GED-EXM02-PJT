@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4548469154128853137}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Block
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,3 +125,5 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  startupPosSpawn: 1

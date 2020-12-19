@@ -304,11 +304,8 @@ public class CollisionManager : MonoBehaviour
     // refreshes the list of cubes
     public void RefreshCubeList(bool includeInactive = true)
     {
-        Array.Resize<CubeBehaviour>(ref cubes, 0);  // clears array (may not be needed?)
+        Array.Resize<CubeBehaviour>(ref cubes, 0);  // clears array
         cubes = FindObjectsOfType<CubeBehaviour>(includeInactive); // fills array again
-
-        Array.Sort(cubes);
-
     }
 
     // resets the whole round

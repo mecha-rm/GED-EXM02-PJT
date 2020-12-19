@@ -1343,6 +1343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1465855747}
   - component: {fileID: 1465855748}
+  - component: {fileID: 1465855749}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -1391,6 +1392,30 @@ MonoBehaviour:
   loadAsChildren: 1
   findBlocks: 1
   addBlockChildren: 1
+--- !u!114 &1465855749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465855746}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee447d0247286e148949a3e4f87f8757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockParent: {fileID: 1465855746}
+  defaultParent: 1
+  addParents: 1
+  preserveParents: 1
+  blockOptions: []
+  blockCount: -1
+  areaPosition: {x: 0, y: 0, z: 0}
+  areaSize: {x: 10, y: 10, z: 10}
+  direcChangeChance: 0.4
+  spreadChance: 0.2
+  cycles: 10
+  colManager: {fileID: 1957707761}
 --- !u!1 &1876624459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,7 +1820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548469154128853136, guid: 411e8e067fb664747bfbeedbd0b754db, type: 3}
       propertyPath: m_TagString
-      value: Block
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 4548469154128853140, guid: 411e8e067fb664747bfbeedbd0b754db, type: 3}
       propertyPath: m_LocalPosition.x
