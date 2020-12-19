@@ -293,23 +293,10 @@ public class CollisionManager : MonoBehaviour
     // destroys all cubes in the cube list.
     public void DestroyCubesInList()
     {
-        // while there are cubes to delete - deletes one by one
-        // while(cubes.Length != 0)
-        // {
-        //     CubeBehaviour cb = RemoveCubeFromList(0);
-        //     Destroy(cb.gameObject);
-        //     Destroy(cb);
-        // }
-
         // destroys all game objects
         foreach (CubeBehaviour cb in cubes)
-        {
-            cb.enabled = false; // disables cube behaviour so it won't be found again.
             Destroy(cb.gameObject); // destroys game object.
-            Destroy(cb); // destroys cube behaviour
-        }
             
-
         Array.Clear(cubes, 0, cubes.Length); // deletes cube behaviour data
         Array.Resize<CubeBehaviour>(ref cubes, 0); // brings it down to 0.
     }

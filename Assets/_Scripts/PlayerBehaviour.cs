@@ -315,6 +315,11 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     colManager.RemoveCubeFromList(GetComponent<CubeBehaviour>()); // removes player's component from the list.
                     colManager.DestroyCubesInList(); // destroys all cubes
+                    
+                }
+                else if(!clearCubes) // this happens on the next iteration of the update loop.
+                {
+                    // this happens here so that the refresh doesn't pickup deleted components.
                     colManager.RefreshCubeList(false); // refreshes list so player's component gets added back.
                 }
                     
