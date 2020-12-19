@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4548469154128853137}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: Ground
-  size: {x: 0, y: 0, z: 0}
+  size: {x: 1, y: 1, z: 1}
   max: {x: 0, y: 0, z: 0}
   min: {x: 0, y: 0, z: 0}
   isColliding: 0

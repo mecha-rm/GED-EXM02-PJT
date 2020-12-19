@@ -39,6 +39,7 @@ public class PlayerBehaviour : MonoBehaviour
     // the game state loader
     public GameStateLoader gsLoader;
     private bool saveData, loadData; // save and load variables
+    private bool clearCubes;
 
     // void start() // original name
     void Start()
@@ -300,7 +301,10 @@ public class PlayerBehaviour : MonoBehaviour
                 break;
 
             case "c": // clears scene (don't do this?)
-                colManager.DestroyCubesInList();
+                clearCubes = !clearCubes;
+
+                if(clearCubes) // clears the cubes
+                    colManager.DestroyCubesInList();
                 break;
 
             default:

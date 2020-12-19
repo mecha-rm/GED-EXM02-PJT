@@ -209,8 +209,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "I to Import Stage from File | O to Export Stage to File | \nC to Clear
-    Map"
+  m_Text: "I to Import Stage from File | O to Export Stage to File | \nR to Refresh
+    Scene | C to Clear Map"
 --- !u!222 &56628213
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2415,6 +2415,10 @@ PrefabInstance:
     - target: {fileID: 4548469154128853136, guid: 411e8e067fb664747bfbeedbd0b754db, type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548469154128853136, guid: 411e8e067fb664747bfbeedbd0b754db, type: 3}
+      propertyPath: m_TagString
+      value: Block
       objectReference: {fileID: 0}
     - target: {fileID: 4548469154128853140, guid: 411e8e067fb664747bfbeedbd0b754db, type: 3}
       propertyPath: m_LocalPosition.x

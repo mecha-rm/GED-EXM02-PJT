@@ -236,6 +236,7 @@ public class GameStateLoader : DataManager
             }
         }
 
+
         // SAVING DATA //
         // for every block
         foreach(CubeBehaviour cube in blocks)
@@ -247,11 +248,15 @@ public class GameStateLoader : DataManager
             // gets the data, and gives it to the manager
             dr.data = SerializeObject(spo);
             AddDataRecordToManager(dr);
+
+            
         }
 
         string getfile = GetManagerFile();
+        int recordAmnt = GetDataRecordAmount();
+
         Debug.Log("File: " + getfile);
-        Debug.Log("Record Count: " + GetDataRecordAmount());
+        Debug.Log("Record Count: " + recordAmnt);
 
         // saves the data
         if (SaveDataRecords())
@@ -264,7 +269,6 @@ public class GameStateLoader : DataManager
         // DeleteAllDataRecordsFromManager();
         ClearAllDataRecordsFromManager();
     }
-    
 
     // Update is called once per frame
     void Update()

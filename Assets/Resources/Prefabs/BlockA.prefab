@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: BlockA
-  size: {x: 0, y: 0, z: 0}
+  size: {x: 1, y: 1, z: 1}
   max: {x: 0, y: 0, z: 0}
   min: {x: 0, y: 0, z: 0}
   isColliding: 0
