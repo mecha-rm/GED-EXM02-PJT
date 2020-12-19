@@ -187,8 +187,9 @@ public class GameStateLoader : DataManager
         // refreshes the collision manager
         CollisionManager cm = FindObjectOfType<CollisionManager>();
 
+        // refreshes the cube list
         if (cm != null)
-            cm.RefreshCubeList();
+            cm.RefreshCubeList(true);
 
     }
 

@@ -205,6 +205,82 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    // removes a cube from the list via its value
+    // if 'keepOrder' is true, then the array is reshuffled. 
+    public void RemoveCubeFromList(CubeBehaviour cb, bool keepOrder = false)
+    {
+        // null provided
+        if (cb == null)
+            return;
+
+        int index = -1; // index of provided cube behaviour
+
+        // goes through the list of cubes to find the provided one.
+        for(int i = 0; i < cubes.Length; i++)
+        {
+            // if the cube behaviour has been found.
+            if(cubes[i] == cb)
+            {
+                index = i;
+                break;
+            }
+        }
+
+        // item not found
+        if (index == -1)
+            return;
+        
+        // switches spots
+        cubes[index] = cubes[cubes.Length - 1];
+        cubes[cubes.Length - 1] = cb;
+
+        // removes last component
+        Array.Resize<CubeBehaviour>(ref cubes, cubes.Length - 1);
+
+        // if the order should be kept
+        if(keepOrder)
+        {
+            // moves swapped item back to its original position
+            for(int i = index; i < cubes.Length - 1; i++)
+            {
+                CubeBehaviour temp = cubes[i];
+                cubes[i] = cubes[i + 1];
+                cubes[i + 1] = temp;
+
+            }
+        }
+    }
+
+    // removes a cube from the list via its index
+    // if 'keepOrder' is true, then the array is reshuffled. 
+    public void RemoveCubeFromList(int index, bool keepOrder = false)
+    {
+        // item not found
+        if (index < 0 || index >= cubes.Length)
+            return;
+
+        // gets the cube and switches places with last index
+        CubeBehaviour cb = cubes[index];
+        cubes[index] = cubes[cubes.Length - 1];
+        cubes[cubes.Length - 1] = cb;
+
+        // removes last component
+        Array.Resize<CubeBehaviour>(ref cubes, cubes.Length - 1);
+
+        // if the order should be kept
+        if (keepOrder)
+        {
+            // moves swapped item back to its original position
+            for (int i = index; i < cubes.Length - 1; i++)
+            {
+                CubeBehaviour temp = cubes[i];
+                cubes[i] = cubes[i + 1];
+                cubes[i + 1] = temp;
+
+            }
+        }
+    }
+
     // clears the cube list
     public void ClearCubeList()
     {
@@ -215,15 +291,24 @@ public class CollisionManager : MonoBehaviour
     // destroys all cubes in the cube list.
     public void DestroyCubesInList()
     {
-        Array.Clear(cubes, 0, cubes.Length); // deletes data
+        // destroys all game objects
+        foreach (CubeBehaviour cb in cubes)
+        {
+            cb.enabled = false; // disables cube behaviour so it won't be found again.
+            Destroy(cb.gameObject); // destroys game object.
+            Destroy(cb); // destroys cube behaviour
+        }
+            
+
+        Array.Clear(cubes, 0, cubes.Length); // deletes cube behaviour data
         Array.Resize<CubeBehaviour>(ref cubes, 0); // brings it down to 0.
     }
 
     // refreshes the list of cubes
-    public void RefreshCubeList()
+    public void RefreshCubeList(bool includeInactive = true)
     {
-        Array.Clear(cubes, 0, cubes.Length); // clears array
-        cubes = FindObjectsOfType<CubeBehaviour>(); // fills array again
+        Array.Resize<CubeBehaviour>(ref cubes, 0);  // clears array (may not be needed?)
+        cubes = FindObjectsOfType<CubeBehaviour>(includeInactive); // fills array again
     }
 
     // resets the whole round

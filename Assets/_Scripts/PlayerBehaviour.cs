@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerBehaviour : MonoBehaviour
 {
     public Transform bulletSpawn;
@@ -284,6 +285,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             case "r": // resets blocks
                 resetBlocks = !resetBlocks;
+
+                // resets blocks if triggered.
+                if (resetBlocks)
+                    colManager.ResetCubes();
+
                 break;
 
             case "i": // import files
@@ -291,6 +297,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                 if (loadData) // if data can be loaded.
                     gsLoader.LoadContent();
+
                 break;
 
             case "o": // export files
@@ -298,22 +305,24 @@ public class PlayerBehaviour : MonoBehaviour
 
                 if (saveData) // if data should be saved.
                     gsLoader.SaveContent();
+
                 break;
 
             case "c": // clears scene (don't do this?)
                 clearCubes = !clearCubes;
 
                 if(clearCubes) // clears the cubes
-                    colManager.DestroyCubesInList();
+                {
+                    colManager.RemoveCubeFromList(GetComponent<CubeBehaviour>()); // removes player's component from the list.
+                    colManager.DestroyCubesInList(); // destroys all cubes
+                    colManager.RefreshCubeList(false); // refreshes list so player's component gets added back.
+                }
+                    
                 break;
 
             default:
                 break;
         }
-
-        // resets blocks if triggered.
-        if(resetBlocks)
-            colManager.ResetCubes();
     }
 
     // fixed update
