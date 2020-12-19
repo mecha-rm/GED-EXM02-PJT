@@ -508,6 +508,8 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  startupPosSpawn: 1
 --- !u!114 &536637369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,6 +767,8 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  startupPosSpawn: 1
 --- !u!114 &1031056707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,6 +894,8 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  startupPosSpawn: 1
 --- !u!114 &1052724109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,6 +1021,8 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  startupPosSpawn: 1
 --- !u!114 &1101564118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,6 +1148,8 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  startupPosSpawn: 1
 --- !u!114 &1170046216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,10 +1385,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveDataOnDestroy: 0
-  deleteDataOnDestroy: 0
+  deleteDataOnDestroy: 1
   file: Assets/Resources/Saves/save.dat
   blocks: []
-  loadAsChildren: 0
+  loadAsChildren: 1
   findBlocks: 1
   addBlockChildren: 1
 --- !u!1 &1876624459
