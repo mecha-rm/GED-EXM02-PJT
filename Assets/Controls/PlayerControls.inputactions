@@ -236,6 +236,17 @@
                     "action": "Other",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03160d6b-86f0-48bd-95b9-f7d22bb3f49c",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Other",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

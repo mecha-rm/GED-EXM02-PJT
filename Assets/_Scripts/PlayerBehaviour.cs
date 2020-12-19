@@ -310,7 +310,7 @@ public class PlayerBehaviour : MonoBehaviour
 
             case "c": // clears scene (don't do this?)
                 clearCubes = !clearCubes;
-
+                
                 if(clearCubes) // clears the cubes
                 {
                     colManager.RemoveCubeFromList(GetComponent<CubeBehaviour>()); // removes player's component from the list.
@@ -318,6 +318,10 @@ public class PlayerBehaviour : MonoBehaviour
                     colManager.RefreshCubeList(false); // refreshes list so player's component gets added back.
                 }
                     
+                break;
+
+            case "b": // back to start
+                UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
                 break;
 
             default:

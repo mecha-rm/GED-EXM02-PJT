@@ -21,6 +21,7 @@ public class MouseLook : MonoBehaviour
 
     // gets the mouse position
     private Vector2 mousePosition = new Vector2();
+    public bool cursorVisible = false;
 
     void Start()
     {
@@ -47,6 +48,9 @@ public class MouseLook : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
+
+        // if the cursor should be visible (or invisible)
+        Cursor.visible = cursorVisible;
 
         // Allow the script to clamp based on a desired target value.
         var targetOrientation = Quaternion.Euler(targetDirection);
@@ -88,5 +92,12 @@ public class MouseLook : MonoBehaviour
             var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
             transform.localRotation *= yRotation;
         }
+    }
+
+    // when leaving teh scene
+    private void OnDestroy()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

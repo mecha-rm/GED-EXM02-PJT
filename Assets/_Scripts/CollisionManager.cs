@@ -253,11 +253,11 @@ public class CollisionManager : MonoBehaviour
 
     // removes a cube from the list via its index
     // if 'keepOrder' is true, then the array is reshuffled. 
-    public void RemoveCubeFromList(int index, bool keepOrder = false)
+    public CubeBehaviour RemoveCubeFromList(int index, bool keepOrder = false)
     {
         // item not found
         if (index < 0 || index >= cubes.Length)
-            return;
+            return null;
 
         // gets the cube and switches places with last index
         CubeBehaviour cb = cubes[index];
@@ -279,6 +279,8 @@ public class CollisionManager : MonoBehaviour
 
             }
         }
+
+        return cb;
     }
 
     // clears the cube list
@@ -291,6 +293,14 @@ public class CollisionManager : MonoBehaviour
     // destroys all cubes in the cube list.
     public void DestroyCubesInList()
     {
+        // while there are cubes to delete - deletes one by one
+        // while(cubes.Length != 0)
+        // {
+        //     CubeBehaviour cb = RemoveCubeFromList(0);
+        //     Destroy(cb.gameObject);
+        //     Destroy(cb);
+        // }
+
         // destroys all game objects
         foreach (CubeBehaviour cb in cubes)
         {
@@ -309,6 +319,9 @@ public class CollisionManager : MonoBehaviour
     {
         Array.Resize<CubeBehaviour>(ref cubes, 0);  // clears array (may not be needed?)
         cubes = FindObjectsOfType<CubeBehaviour>(includeInactive); // fills array again
+
+        Array.Sort(cubes);
+
     }
 
     // resets the whole round
