@@ -205,6 +205,20 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    // destroys all cubes in the cube list.
+    public void DestroyCubesInList()
+    {
+        for (int i = 0; i < cubes.Length; i++)
+            Destroy(cubes[i].gameObject);
+
+        cubes[0] = null;
+    }
+
+    // refreshes the list of cubes
+    public void RefreshCubeList()
+    {
+        cubes = FindObjectsOfType<CubeBehaviour>();
+    }
 
     // resets the whole round
     // public void ResetScene()
@@ -218,7 +232,7 @@ public class CollisionManager : MonoBehaviour
     // }
 
     // resets the blocks
-    public void ResetBlocks()
+    public void ResetCubes()
     {
         // will need ot be changed for new input system
         for (int i = 0; i < cubes.Length; i++) // re-enables all cubes

@@ -299,13 +299,17 @@ public class PlayerBehaviour : MonoBehaviour
                     gsLoader.SaveContent();
                 break;
 
+            case "c": // clears scene (don't do this?)
+                colManager.DestroyCubesInList();
+                break;
+
             default:
                 break;
         }
 
         // resets blocks if triggered.
         if(resetBlocks)
-            colManager.ResetBlocks();
+            colManager.ResetCubes();
     }
 
     // fixed update

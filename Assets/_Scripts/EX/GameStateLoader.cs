@@ -183,6 +183,13 @@ public class GameStateLoader : DataManager
                 newObject.transform.parent = gameObject.transform;
         }
 
+
+        // refreshes the collision manager
+        CollisionManager cm = FindObjectOfType<CollisionManager>();
+
+        if (cm != null)
+            cm.RefreshCubeList();
+
     }
 
 
@@ -255,6 +262,7 @@ public class GameStateLoader : DataManager
         // deletes all records - calling this function causes the game to crash, and I don't know why.
         // either way, this function shouldn't be used.
         // DeleteAllDataRecordsFromManager();
+        ClearAllDataRecordsFromManager();
     }
     
 

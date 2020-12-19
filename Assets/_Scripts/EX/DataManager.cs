@@ -327,7 +327,9 @@ public class DataManager : MonoBehaviour
 			ExportDataRecords();
 
 		// if data should be deleted when this object is destroyed.
+		// calling DeleteAllDataRecords() crashes the project.
+		// so clear is called instead, though it may be leaving data unaccounted for.
 		if (deleteDataOnDestroy)
-			DeleteAllDataRecords();
+			ClearAllDataRecords(); // delete all records// DeleteAllDataRecords(); // delete all records
 	}
 }
