@@ -209,8 +209,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "I - Import Stage from File | O - Export Stage to File| [G] - Randomize
-    Level | \nR to Refresh Scene | C to Clear Map | B to Return to Start"
+  m_Text: "[I] - Import Stage from File | [O] - Export Stage to File| [G] - Randomize
+    Level | \n[R] to Refresh Scene | [C] to Clear Map | [B] to Return to Start"
 --- !u!222 &56628213
 CanvasRenderer:
   m_ObjectHideFlags: 0
