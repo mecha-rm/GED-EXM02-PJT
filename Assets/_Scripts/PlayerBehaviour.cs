@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+// behaviour for player object.
 public class PlayerBehaviour : MonoBehaviour
 {
     public Transform bulletSpawn;
@@ -94,7 +91,7 @@ public class PlayerBehaviour : MonoBehaviour
                 body.velocity = playerCam.transform.forward * speed * Time.deltaTime;
             }
 
-            if (Input.GetAxisRaw("Vertical") < 0.0f) 
+            if (Input.GetAxisRaw("Vertical") < 0.0f)
             {
                 // move Back
                 body.velocity = -playerCam.transform.forward * speed * Time.deltaTime;
@@ -102,7 +99,7 @@ public class PlayerBehaviour : MonoBehaviour
 
             body.velocity = Vector3.Lerp(body.velocity, Vector3.zero, 0.9f);
             body.velocity = new Vector3(body.velocity.x, 0.0f, body.velocity.z); // remove y
-            
+
 
             if (Input.GetAxisRaw("Jump") > 0.0f)
             {
@@ -123,15 +120,15 @@ public class PlayerBehaviour : MonoBehaviour
 
         switch (context.control.name)
         {
-                // move forward
+            // move forward
             case "w":
                 wKey = !wKey;
                 break;
             case "upArrow":
                 upArrow = !upArrow;
                 break;
-                
-                // move back
+
+            // move back
             case "s":
                 sKey = !sKey;
                 break;
@@ -139,7 +136,7 @@ public class PlayerBehaviour : MonoBehaviour
                 downArrow = !downArrow;
                 break;
 
-                // move left
+            // move left
             case "a":
                 aKey = !aKey;
                 break;
@@ -147,7 +144,7 @@ public class PlayerBehaviour : MonoBehaviour
                 leftArrow = !leftArrow;
                 break;
 
-                // move right
+            // move right
             case "d":
                 dKey = !dKey;
                 break;
@@ -155,7 +152,7 @@ public class PlayerBehaviour : MonoBehaviour
                 rightArrow = !rightArrow;
                 break;
 
-                // jump
+            // jump
             case "spaceBar":
                 spaceBar = !spaceBar;
                 break;
@@ -262,7 +259,7 @@ public class PlayerBehaviour : MonoBehaviour
         int bulletInt = 0;
 
         // due to the way this works, it provides a number 1 less than the number selected.
-        switch(context.control.name)
+        switch (context.control.name)
         {
             case "1":
             case "numpad1":
@@ -297,7 +294,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         // control
         // this gets triggered twice 
-        switch(context.control.name)
+        switch (context.control.name)
         {
             case "r": // resets blocks
                 resetBlocks = !resetBlocks;
@@ -326,19 +323,19 @@ public class PlayerBehaviour : MonoBehaviour
 
             case "c": // clears scene (don't do this?)
                 clearCubes = !clearCubes;
-                
-                if(clearCubes) // clears the cubes
+
+                if (clearCubes) // clears the cubes
                 {
                     colManager.RemoveCubeFromList(GetComponent<CubeBehaviour>()); // removes player's component from the list.
                     colManager.DestroyCubesInList(); // destroys all cubes
-                    
+
                 }
-                else if(!clearCubes) // this happens on the next iteration of the update loop.
+                else if (!clearCubes) // this happens on the next iteration of the update loop.
                 {
                     // this happens here so that the refresh doesn't pickup deleted components.
                     colManager.RefreshCubeList(false); // refreshes list so player's component gets added back.
                 }
-                    
+
                 break;
 
             case "b": // back to start
@@ -348,9 +345,9 @@ public class PlayerBehaviour : MonoBehaviour
             case "g": // generate random level
                 genRandLvl = !genRandLvl;
 
-                if(genRandLvl)
+                if (genRandLvl)
                     levelGenerator.GenerateLevel();
- 
+
                 break;
 
             default:

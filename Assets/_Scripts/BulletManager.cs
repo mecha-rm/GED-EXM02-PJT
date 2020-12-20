@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 // original bullet manager
@@ -55,11 +54,11 @@ using UnityEngine;
 // }
 
 
-
+// singleton that manages bullets using an object pool.
 [System.Serializable]
 public class BulletManager
 {
-    public enum bulletType {sphere, cube, capsule, cylinder};
+    public enum bulletType { sphere, cube, capsule, cylinder };
     public const int BULLET_TYPE_COUNT = 4;
 
     // instance of bullet pool manager.
@@ -113,13 +112,13 @@ public class BulletManager
             parentObject = GameObject.Find("BulletManager");
 
             // if the bullet manager object was not made, then make it.
-            if(parentObject == null)
+            if (parentObject == null)
                 parentObject = new GameObject("BulletManager");
         }
 
         // initialize bullet bases list and pools.
         bulletBases = new List<GameObject>();
-        bulletPools = new List<Queue<GameObject>>(); 
+        bulletPools = new List<Queue<GameObject>>();
 
         // adding bullet pools and bullets
         for (int i = 0; i < BULLET_TYPE_COUNT; i++)
@@ -156,15 +155,15 @@ public class BulletManager
 
             // gets the current bullet base.
             bullet = bulletBases[b];
-            
+
             // if a bullt has been set
-            if(bullet != null)
+            if (bullet != null)
             {
                 // makes all bullets for the given queue
                 for (int count = 0; count < MaxBullets; count++)
                 {
                     GameObject tempPlayerBullet = MonoBehaviour.Instantiate(bullet);
-            
+
                     tempPlayerBullet.transform.SetParent(parentObject.transform);
                     tempPlayerBullet.SetActive(false);
 
@@ -195,7 +194,7 @@ public class BulletManager
     // sets the current bullet type
     public void SetCurrentBulletType(int newType)
     {
-        
+
         currBulletType = (bulletType)Mathf.Clamp(newType, 0, BULLET_TYPE_COUNT);
     }
 
@@ -229,7 +228,7 @@ public class BulletManager
             newBullet.transform.SetParent(parentObject.transform);
         }
 
-        
+
         newBullet.SetActive(true);
         newBullet.transform.position = position;
         newBullet.GetComponent<BulletBehaviour>().direction = direction;

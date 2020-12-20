@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // changes the scene
@@ -9,7 +7,7 @@ public class SceneChanger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // changes the scene using its name
@@ -27,6 +25,6 @@ public class SceneChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

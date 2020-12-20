@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 // level generator class
@@ -80,7 +79,7 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         // no tiles set, load all the prefabs
-        if(blockOptions.Count == 0)
+        if (blockOptions.Count == 0)
         {
             object prefab; // loaded prefab
 
@@ -265,7 +264,7 @@ public class LevelGenerator : MonoBehaviour
             int currBlock = 0;
 
             // if the block count is less than or equal to 0, it's set to the maximum amount of spaces.
-            if(blockCount <= 0)
+            if (blockCount <= 0)
             {
                 // blocks should fill all spaces
                 blockCount = spaces;
@@ -285,7 +284,7 @@ public class LevelGenerator : MonoBehaviour
 
                         // generates new base position
                         Vector3 newPos = new Vector3(offset.x * col, offset.y * n, offset.z * row);
-                        
+
                         // moves to align object with origin
                         newPos -= Vector3.Scale(Vector3.Scale(areaSize, areaOrigin), offset);
 
@@ -308,10 +307,10 @@ public class LevelGenerator : MonoBehaviour
                         }
 
                         // if the parents should be perserved if not set
-                        if(addParents && blockParent != null)
+                        if (addParents && blockParent != null)
                         {
                             // if there is no parent, or if there is a parent and it should be overridded.
-                            if(go.transform.parent == null || (go.transform.parent != null && !preserveParents))
+                            if (go.transform.parent == null || (go.transform.parent != null && !preserveParents))
                             {
                                 go.transform.parent = blockParent.transform;
                             }
@@ -323,7 +322,7 @@ public class LevelGenerator : MonoBehaviour
                         currBlock++;
 
                         // if the block count has been reached, break.
-                        if(currBlock == blockCount)
+                        if (currBlock == blockCount)
                             break;
                     }
 
@@ -363,7 +362,7 @@ public class LevelGenerator : MonoBehaviour
                 }
 
                 // Ground
-                if(ground != null)
+                if (ground != null)
                 {
                     MeshRenderer groundMr = ground.GetComponent<MeshRenderer>(); // gets the ground's mesh renderer
 
@@ -402,10 +401,10 @@ public class LevelGenerator : MonoBehaviour
                         CubeBehaviour.deathPlaneY = newPos.y += CubeBehaviour.deathPlaneY;
                     }
                 }
-                
+
 
                 // Player
-                if(player != null)
+                if (player != null)
                 {
                     Vector3 newPos;
 
@@ -469,9 +468,9 @@ public class LevelGenerator : MonoBehaviour
     void Update()
     {
         // if the blocks should be reset.
-        if(resetBlocks)
+        if (resetBlocks)
         {
-            if(refreshCD <= 0) // time to refresh
+            if (refreshCD <= 0) // time to refresh
             {
                 refreshCD = 0;
                 resetBlocks = false;
@@ -482,7 +481,7 @@ public class LevelGenerator : MonoBehaviour
                     colManager = FindObjectOfType<CollisionManager>();
 
                     // does not exist
-                    if(colManager == null)
+                    if (colManager == null)
                     {
                         return;
                     }

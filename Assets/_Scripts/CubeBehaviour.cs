@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Color = UnityEngine.Color;
@@ -49,6 +48,7 @@ public class Contact : IEquatable<Contact>
 }
 
 
+// behaviour for cubes - handles collision checks.
 [System.Serializable]
 public class CubeBehaviour : MonoBehaviour
 {

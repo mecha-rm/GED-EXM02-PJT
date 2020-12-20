@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+// mouse look for changing camera position and view.
 public class MouseLook : MonoBehaviour
 {
     Vector2 _mouseAbsolute;

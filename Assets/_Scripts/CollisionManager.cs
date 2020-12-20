@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// collision manager for the project.
 [System.Serializable]
 public class CollisionManager : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class CollisionManager : MonoBehaviour
         for (int i = 0; i < cubes.Length; i++)
         {
             // if the cube behaviour does not exist, it gets marked for removal.
-            if(cubes[i] == null)
+            if (cubes[i] == null)
             {
                 cubeDels.Push(i);
                 continue;
@@ -53,7 +53,7 @@ public class CollisionManager : MonoBehaviour
         }
 
         // while there are still indexes to remove.
-        while(cubeDels.Count > 0)
+        while (cubeDels.Count > 0)
         {
             RemoveCubeFromList(cubeDels.Peek()); // removes data
             cubeDels.Pop(); // removes index
@@ -71,7 +71,7 @@ public class CollisionManager : MonoBehaviour
                 {
                     CheckSphereAABB(sphere, cube);
                 }
-                
+
             }
         }
     }
@@ -122,7 +122,7 @@ public class CollisionManager : MonoBehaviour
             s.collisionNormal = face;
             //s.isColliding = true;
 
-            
+
             Reflect(s);
 
             // collision has happened. Uncomment to keep cubes.
@@ -130,7 +130,7 @@ public class CollisionManager : MonoBehaviour
         }
 
     }
-    
+
     // This helper function reflects the bullet when it hits an AABB face
     private static void Reflect(BulletBehaviour s)
     {
@@ -185,7 +185,7 @@ public class CollisionManager : MonoBehaviour
                     face = faces[i];
                 }
             }
-            
+
             // set the contact properties
             contactB.face = face;
             contactB.penetration = penetration;
@@ -208,12 +208,12 @@ public class CollisionManager : MonoBehaviour
                     a.gameObject.GetComponent<RigidBody3D>().Stop();
                     a.isGrounded = true;
                 }
-                
+
 
                 // add the new contact
                 a.contacts.Add(contactB);
                 a.isColliding = true;
-                
+
             }
         }
         else
@@ -244,10 +244,10 @@ public class CollisionManager : MonoBehaviour
         int index = -1; // index of provided cube behaviour
 
         // goes through the list of cubes to find the provided one.
-        for(int i = 0; i < cubes.Length; i++)
+        for (int i = 0; i < cubes.Length; i++)
         {
             // if the cube behaviour has been found.
-            if(cubes[i] == cb)
+            if (cubes[i] == cb)
             {
                 index = i;
                 break;
@@ -257,7 +257,7 @@ public class CollisionManager : MonoBehaviour
         // item not found
         if (index == -1)
             return;
-        
+
         // switches spots
         cubes[index] = cubes[cubes.Length - 1];
         cubes[cubes.Length - 1] = cb;
@@ -266,10 +266,10 @@ public class CollisionManager : MonoBehaviour
         Array.Resize<CubeBehaviour>(ref cubes, cubes.Length - 1);
 
         // if the order should be kept
-        if(keepOrder)
+        if (keepOrder)
         {
             // moves swapped item back to its original position
-            for(int i = index; i < cubes.Length - 1; i++)
+            for (int i = index; i < cubes.Length - 1; i++)
             {
                 CubeBehaviour temp = cubes[i];
                 cubes[i] = cubes[i + 1];
@@ -324,7 +324,7 @@ public class CollisionManager : MonoBehaviour
         // destroys all game objects
         foreach (CubeBehaviour cb in cubes)
             Destroy(cb.gameObject); // destroys game object.
-            
+
         Array.Clear(cubes, 0, cubes.Length); // deletes cube behaviour data
         Array.Resize<CubeBehaviour>(ref cubes, 0); // brings it down to 0.
     }

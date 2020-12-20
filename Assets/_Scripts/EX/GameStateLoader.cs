@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 // vector 3 serializable
 [System.Serializable]
@@ -18,12 +16,14 @@ public struct Vec4 { public float x, y, z, w; };
 public struct Quat { public float x, y, z, w; };
 
 
+// serializable prefab struct
 [System.Serializable]
 public struct SerializablePrefabObject
 {
     public string prefab; // include path from Prefabs folder.
     public bool active; // if object was active or not
 
+    // transformation information.
     public Vec3 position;
     public Quat rotation;
     public Vec3 scale;
@@ -43,14 +43,14 @@ public class GameStateLoader : DataManager
 
     // seraches for blocks if true.
     public bool findBlocks = true;
-    
+
     // adds children of the object's list
     public bool addBlockChildren = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // serializes an object
@@ -104,7 +104,7 @@ public class GameStateLoader : DataManager
 
         return so;
     }
-    
+
     // deserializes a game object
     public GameObject UnpackPrefabGameObject(SerializablePrefabObject so)
     {
@@ -116,7 +116,7 @@ public class GameStateLoader : DataManager
             newObject = Instantiate((GameObject)prefab); // instantiate game object
         else
             newObject = new GameObject(); // empty game object otherwise
-        
+
         newObject.SetActive(so.active);
 
         // transformation information
@@ -202,14 +202,14 @@ public class GameStateLoader : DataManager
         // sets the manager file
         SetManagerFile(file);
 
-        // the file will be generated if it doesn't exist
+        // the file will be generated if it doesn't exist, so this is unneeded.
         // if the file is not available, do not save content.
         // if (!FileAvailable())
         // {
         //     Debug.LogError("File Not Accessible. Save Failed.");
         //     return;
         // }
-            
+
         // if 'true', it finds all active blicks
         if (findBlocks)
         {
@@ -227,7 +227,7 @@ public class GameStateLoader : DataManager
 
         // adds children of the parent object.
         // if all blocks with the component were added, then this doesn't need to be called
-        if(!findBlocks && addBlockChildren)
+        if (!findBlocks && addBlockChildren)
         {
             // gets cubes that are children of the parent object.
             CubeBehaviour[] cubes = GetComponentsInChildren<CubeBehaviour>(true);
@@ -243,17 +243,17 @@ public class GameStateLoader : DataManager
 
         // SAVING DATA //
         // for every block
-        foreach(CubeBehaviour cube in blocks)
+        foreach (CubeBehaviour cube in blocks)
         {
             // packs all objects for the data record
             SerializablePrefabObject spo = PackPrefabGameObject(cube.prefab, cube.gameObject);
             DataRecord dr; // data record
-            
+
             // gets the data, and gives it to the manager
             dr.data = SerializeObject(spo);
             AddDataRecordToManager(dr);
 
-            
+
         }
 
         string getfile = GetManagerFile();
@@ -277,6 +277,6 @@ public class GameStateLoader : DataManager
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum BodyType
 {
@@ -8,7 +6,7 @@ public enum BodyType
     DYNAMIC
 }
 
-
+// rigid body for physics calculations.
 [System.Serializable]
 public class RigidBody3D : MonoBehaviour
 {
@@ -45,7 +43,7 @@ public class RigidBody3D : MonoBehaviour
             if (isFalling)
             {
                 timer += Time.deltaTime;
-                
+
                 if (gravityScale < 0)
                 {
                     gravityScale = 0;
